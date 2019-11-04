@@ -1,0 +1,122 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+@author Gaurav Tayade
+/* 
+    Created on : 2-Nov-2019, 2:53:51 PM
+    Author     : Gaurav
+*/
+
+.nav-bar-position{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}
+
+.header-font{
+    font-size: 38px;
+    text-shadow: grey 5px 5px 5px;
+    font-family: inherit;
+}
+
+.heros-intro-img{
+    width: 250px;
+    height:250px;
+}
+
+.box-shadow{
+    box-shadow: grey 5px 5px 5px;
+}
+
+.text-shadow{
+    text-shadow:grey 5px 5px 5px;
+}
+
+.nav-background-stripe{
+    background-image: url(../images/bg_stripe.jpg);
+    background-blend-mode: overlay;
+}
+
+.login-model-close{
+    position: absolute;
+    right: 7px;
+    top: 7px;
+}
+
+.login-model-img-round{
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: inset #090909 6px 7px 20px 2px;
+}
+
+.modal-dailog-login{
+    width:350px;
+}
+
+.modal-content{
+    background: url(../images/login_modal_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    box-shadow: #090909 6px 7px 20px 2px;
+}
+
+.btn-logout{
+    background: none!important;
+    border: none;
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    cursor: pointer;
+}
+
+.background-black{
+    background-color: #090909;
+}
+
+.shadow-white{
+    box-shadow: #fff 5px 5px 5px;
+}
+
+.heros-profile-image-round{
+    border-radius: 50%;
+}
+
+.hero-card{
+    box-shadow: grey 5px 5px 5px;
+    transition: 0.5s;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+.hero-card > img{
+    transition: 0.5s;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+.hero-card div h5{
+    transition: 0.5s;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+
+.hero-card:hover {
+    box-shadow: grey 8px 8px 8px;
+    background-image: url('../images/card-bg-2.jpg');
+    background-position: center;
+    background-attachment: inherit;
+    background-size: cover;
+}
+
+.hero-card:hover img{
+    margin-top: 5px;
+    border-radius: 50%;
+    box-shadow: grey 5px 5px 5px;
+}
+
+.hero-card:hover div > h5{
+    text-shadow:grey 5px 5px 5px;
+}
+
