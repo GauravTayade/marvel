@@ -23,8 +23,8 @@ public class AvengerDb {
     
     public Connection sqlconnection(){
     
-        String driver = "org.postgres.Driver";
-        String connURL = "jdbc:postgresql://loclahost/MyDb";
+        String driver = "org.postgresql.Driver";
+        String connURL = "jdbc:postgresql://localhost/MyDb";
         String username ="postgres";
         String password =  "root";
         Connection conn = null;
@@ -59,16 +59,23 @@ public class AvengerDb {
     
     public int addAvenger(Avenger avenger){
     
-        String insertQuery =  "INSERT INTO avengers (\"\",\"bookauthour\",\"bookyear\",\"bookprice\",\"bookrating\",\"bookstatus\") "
-                        + "VALUES ('"+txtBookTitle.getText()+"',"
-                        + "'"+txtBookAuthour.getText()+"',"
-                        + "'"+txtBookYear.getText()+"',"
-                        + ""+Float.parseFloat(txtBookPrice.getText())+","
-                        + "'"+txtBookRating.getText()+"',"
-                        + ""+Integer.parseInt(txtBookStatus.getText())+");";
+        int result = 0;
+        String insertQuery =  "INSERT INTO avengers (\"avengername\",\"description\",\"powersource\",\"img\") "
+                        + "VALUES ('"+avenger.getName()+"',"
+                        + "'"+avenger.getDescription()+"',"
+                        + "'"+avenger.getPowerSource().getId()+"',"
+                        + "'"+avenger.getImgURL()+"')";
+        
         Connection sqlconnection = this.sqlconnection();
-        Statement statement = sqlconnection.createStatement();
-        return statement.executeUpdate(query);
+        try{
+            System.out.println(insertQuery);
+            Statement statement = sqlconnection.createStatement();
+            result = statement.executeUpdate(insertQuery);
+        }catch(SQLException sqlex){
+        
+        }
+        
+        return result;
     }
     
     public ArrayList<Avenger> getAvengers(){

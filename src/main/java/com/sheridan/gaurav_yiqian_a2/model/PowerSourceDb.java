@@ -24,39 +24,35 @@ public class PowerSourceDb {
     
     public ResultSet dbQuery(String queryString){
         
-        String driver = "org.postgres.Driver";
-        String connURL = "jdbc:postgresql://loclahost/MyDb";
+        String driver = "org.postgresql.Driver";
+        String connURL = "jdbc:postgresql://localhost/MyDb";
         String username ="postgres";
         String password =  "root";
         Connection conn = null;
         String query = queryString;
         ResultSet rs = null;
-        
-        try{
+      
+        try{   
             Class.forName(driver).newInstance();
-        
             conn = DriverManager.getConnection(connURL,username,password);
-        }catch(Exception ex){
-        
-        }
-        
-        try{
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
-        }catch(SQLException sqlex){
-        
+        }catch(Exception ex){
+            System.out.println(ex);
         }
+       
       return rs;
     }
         
     public PowerSource getPowerSource(int id){
     
         String getPowerSourcesQuery = "SELECT * FROM powersource where id="+id;
-        ResultSet resultSetPowerSource = this.dbQuery(getPowerSourcesQuery);
-        
+        System.out.println(getPowerSourcesQuery);
+        ResultSet resultSetPowerSource = dbQuery(getPowerSourcesQuery);
+        System.out.println(resultSetPowerSource);
         try{
             while(resultSetPowerSource.next()){
-                powerSource = new PowerSource(resultSetPowerSource.getInt(1),resultSetPowerSource.getString(2));
+                powerSource = new PowerSource(resultSetPowerSource.getInt("id"),resultSetPowerSource.getString("description"));
             }
         }catch(SQLException sqlex){
         

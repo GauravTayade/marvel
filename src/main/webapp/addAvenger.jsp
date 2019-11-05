@@ -18,7 +18,7 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6" style="background-image: url('resources/images/logo.png'); background-repeat: no-repeat; background-position: bottom right;">
                     <h3 class="display-4 text-center text-shadow">Add Avenger</h3>
-                    <form action="#" method="POST">
+                    <form action="addAvenger.do" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="avengerName">Avenger Name:</label>
                             <input type="text"  name="avengerName" class="form-control" id="avengerName"placeholder="Enter Avenger Name">
@@ -30,11 +30,30 @@
                         <div class="form-group">
                             <label>Power Source:</label>
                             <select class="form-control" name="powerSource">
-                                <option value=""></option>
-                                <option value="amazingtechnology">Amazing Technology</option>
-                                <option value="supernatural">Super Natural</option>
-                                <option value="thanoschild">Thanos Child</option>
+                                <option value="">Select Powersource</option>
+                                <option value="1">Amazing Technology</option>
+                                <option value="2">Super Natural</option>
+                                <option value="3">Thanos Child</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Profile Image:</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="avengerImage" name="avengerImage">
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="resources/images/image-preview.png" style="height:250px;width:250px;" class="rounded img-fluid box-shadow" id="avengerImagePreview">
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Add Avenger to Team</button>
                     </form>

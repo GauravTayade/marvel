@@ -21,9 +21,9 @@ $(document).ready(function() {
                             imageHeight: 200,
                             text: 'Redirecting!',
                             type: 'success',
-                            timer: 6400,
+                            timer: 6000,
                         });
-                        window.setTimeout(function(){ location.reload(true) } ,6400);
+                        window.setTimeout(function(){ location.reload(true) } ,6000);
                        }else{
                            Swal.fire({
                             imageUrl: 'resources/images/incorrect_password.jpg',

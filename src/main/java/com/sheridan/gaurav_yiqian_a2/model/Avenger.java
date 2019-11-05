@@ -27,6 +27,13 @@ public class Avenger implements Serializable{
         this.imgURL = imgURL;
     }
     
+    public Avenger(String name, String desciption,PowerSource powerSource, String imgURL){
+        this.name = name;
+        this.description = desciption;
+        this.powerSource = powerSource;
+        this.imgURL = imgURL;
+    }
+    
     public int getId() {
         return id;
     }

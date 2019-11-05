@@ -17,6 +17,9 @@ public class PowerSource implements Serializable{
     private int id;
     private String description;
 
+    public PowerSource(){
+    }
+    
     public PowerSource(int id,String description) {
         this.id = id;
         this.description = description;
