@@ -20,3 +20,9 @@ function readURL(input) {
 $("#avengerImage").change(function() {
   readURL(this);
 });
+
+//$(".btnDelete").on("click",function(e){
+//    e.preventDefault();
+//    console.log($(this).parent().parent());
+//   $(this).parent().parent().remove();
+//});

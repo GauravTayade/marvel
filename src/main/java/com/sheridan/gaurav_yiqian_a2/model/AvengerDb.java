@@ -6,8 +6,10 @@
 */
 package com.sheridan.gaurav_yiqian_a2.model;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +36,7 @@ public class AvengerDb {
         
             conn = DriverManager.getConnection(connURL,username,password);
         }catch(Exception ex){
-        
+             System.out.println("ex"+ex);
         }
     
          return conn;
@@ -45,12 +47,12 @@ public class AvengerDb {
         Connection sqlconnection = this.sqlconnection();
         String query = queryString;
         ResultSet rs = null;
-               
+               System.out.println(query);
         try{
             Statement stmt = sqlconnection.createStatement();
             rs = stmt.executeQuery(query);
         }catch(SQLException sqlex){
-        
+            System.out.println(sqlex);
         }
       return rs;
     }
@@ -78,11 +80,31 @@ public class AvengerDb {
         return result;
     }
     
+    public int removeAvenger(int id){
+        
+        int result=0 ;
+        Connection conn = this.sqlconnection();
+        PreparedStatement prestatment=null;
+        
+        try{
+            String removeAvengersQuery = "DELETE FROM avengers Where id="+id;
+            prestatment = conn.prepareStatement(removeAvengersQuery);
+            
+            System.out.println(removeAvengersQuery);
+
+            result = prestatment.executeUpdate();
+        }catch(SQLException sqlex){
+            System.out.println(sqlex);
+        }
+        
+        return result;
+    }
+    
     public ArrayList<Avenger> getAvengers(){
     
         String getAvengersQuery = "SELECT * FROM avengers";
         ResultSet resultSetAvengers = this.dbQuery(getAvengersQuery);
-        
+        avengersList.clear();
         try{
             while(resultSetAvengers.next()){
                 

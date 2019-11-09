@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +36,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @MultipartConfig
 public class AddAvenger extends HttpServlet {
    
-    String name,description,imgURL;
+    String name,description,imgURL,uploadPath;
     PowerSource powersource;
     
     AvengerDb avengerdb = new AvengerDb();
@@ -55,14 +56,19 @@ public class AddAvenger extends HttpServlet {
                 List<FileItem> fields = upload.parseRequest(request);
                 Iterator<FileItem> it = fields.iterator();
                 
+//                ServletContext context = request.getServletContext();
+//                File file = new File(".");
+//                context.log(file.getCanonicalPath());
+                
                 while(it.hasNext()){
                     FileItem fileItem = it.next();
                     if (fileItem.isFormField()) {
                         fieldsHash.put(fileItem.getFieldName(), fileItem.getString());
                     } else {
-                        imageUrl="D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
+                        uploadPath = "D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
+                        imageUrl="resources\\images\\heros-profile\\"+ fileItem.getName();
                         try{
-                            fileItem.write(new File(imageUrl));
+                            fileItem.write(new File(uploadPath));
                         }catch(Exception ex){
                             System.out.println(ex);
                         }
@@ -79,7 +85,7 @@ public class AddAvenger extends HttpServlet {
         PowerSourceDb powerSourceDb = new PowerSourceDb();
         powersource = powerSourceDb.getPowerSource(Integer.parseInt(fieldsHash.get("powerSource")));
         
-        Avenger avenger = new Avenger(fieldsHash.get("avengerName"), fieldsHash.get("avengerName"), powersource, imageUrl);
+        Avenger avenger = new Avenger(fieldsHash.get("avengerName"), fieldsHash.get("avengerDescription"), powersource, imageUrl);
         if(avengerdb.addAvenger(avenger) >  0){
             RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
             rd.forward(request, response);

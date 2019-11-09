@@ -40,7 +40,9 @@
                                 <a class="nav-link" href="addAvenger.jsp">Add Avenger</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="displayAvengers.jsp">Display Avenger</a>
+                                <form action="getAvengers.do" method="GET">
+                                    <input class="nav-link btn-logout" type="submit" name="displayAvengers" value="Display Avengers"/>
+                                </form>
                             </li>
                         </c:when>
                         <c:otherwise>

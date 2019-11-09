@@ -79,4 +79,5 @@
     <script src="resources/plugins/fontawesome/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="resources/js/common.js" type="text/javascript"></script>
+    </script>
 </html>
