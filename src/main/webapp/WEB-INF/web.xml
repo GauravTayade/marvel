@@ -16,6 +16,10 @@
         <servlet-name>UserLogout</servlet-name>
         <servlet-class>com.sheridan.gaurav_yiqian_a2.servlets.UserLogout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteAvenger</servlet-name>
+        <servlet-class>com.sheridan.gaurav_yiqian_a2.servlets.deleteAvenger</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddAvenger</servlet-name>
         <url-pattern>/addAvenger.do</url-pattern>
@@ -31,6 +35,49 @@
     <servlet-mapping>
         <servlet-name>UserLogout</servlet-name>
         <url-pattern>/userLogout.do</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <!-- mandatory -->
+        <filter-class>com.sheridan.gaurav_yiqian_a2.filters.LoginFilter</filter-class>
+        <!-- mandatory -->
+        <init-param>
+            <!-- optional -->
+            <param-name>notAllowed</param-name>
+            <param-value>addAvenger.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <!-- mandatory -->
+        <url-pattern>/addAvenger.jsp</url-pattern>
+        <!-- either url-pattern or servlet-name is mandatory -->
+        <servlet-name>AdAvenger</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <!-- mandatory -->
+        <url-pattern>/displayAvengers.jsp</url-pattern>
+        <!-- either url-pattern or servlet-name is mandatory -->
+        <servlet-name>GetAvengers</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+    <servlet-mapping>
+        <servlet-name>deleteAvenger</servlet-name>
+        <url-pattern>/deleteAvenger.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
