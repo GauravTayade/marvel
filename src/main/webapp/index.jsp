@@ -10,16 +10,9 @@
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>        
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>        
     </ol>
     <div class="carousel-inner">
-        <div class="carousel-item text-center">
-            <video autoplay="autoplay" muted>
-                <source src="resources/videos/intro-720.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
         <div class="carousel-item active">
             <img src="resources/images/poster.jpg" class="d-block w-100" alt="...">
         </div>

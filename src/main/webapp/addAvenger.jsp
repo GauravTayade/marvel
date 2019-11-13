@@ -3,7 +3,7 @@
     Created on : 2-Nov-2019, 1:39:58 PM
     Author     : tayad
 --%>
-
+<%@taglib prefix="mylib" uri="/WEB-INF/tlds/powersource.tld" %>
 <jsp:include page="common/header.jsp"></jsp:include>
     <div class="row m-5">
         
@@ -29,12 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label>Power Source:</label>
-                            <select class="form-control" name="powerSource">
-                                <option value="">Select Powersource</option>
-                                <option value="1">Amazing Technology</option>
-                                <option value="2">Super Natural</option>
-                                <option value="3">Thanos Child</option>
-                            </select>
+                            <mylib:powerSource></mylib:powerSource>
                         </div>
                         <div class="form-group">
                             <div class="row">

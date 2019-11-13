@@ -26,3 +26,26 @@ $("#avengerImage").change(function() {
 //    console.log($(this).parent().parent());
 //   $(this).parent().parent().remove();
 //});
+
+	window.onload = function() {
+        Particles.init({
+          selector: '.background',
+          speed:0.5,
+          color: '#75A5B7',
+          maxParticles: 180,
+          connectParticles: true,
+          responsive: [
+            {
+              breakpoint: 768,
+              options: {
+                maxParticles: 80
+              }
+            }, {
+              breakpoint: 375,
+              options: {
+                maxParticles: 50
+              }
+            }
+          ]
+        });
+      };

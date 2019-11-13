@@ -46,7 +46,7 @@
                                     <i class="fa fa-user"></i>
                                 </div>
                                 <div class="from-input col-md-10">
-                                    <input type="text" name="username" placeholder="Username" class="form-control" id="inputUsername">
+                                    <input type="text" name="username" placeholder="Username" class="form-control" id="inputUsername" autofocus>
                                 </div>
                             </div>                        
                         </div>
@@ -69,6 +69,8 @@
             </div>
         </div>
     </div>
+    
+    <canvas class="background"></canvas>
     <!--Login modal End-->
     </body>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -79,5 +81,5 @@
     <script src="resources/plugins/fontawesome/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="resources/js/common.js" type="text/javascript"></script>
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 </html>

@@ -20,8 +20,15 @@
                         <h5 class="card-title text-center">${avenger.getName()}</h5>
                         <p class="card-text">${avenger.getDescription()}</p>
                         <h5 class="card-title text-center">Power Source:</h5>
-                        <p class="card-text">${avenger.getPowerSource().getDescription()}</p>
-                        <a href="deleteAvenger.do?id=${avenger.getId()}" class="btnDelete" id="btnDelete">Info</a>
+                        <p class="card-text card-text-maargin-bottom">${avenger.getPowerSource().getDescription()}</p>
+                        <div class="col-md-11 bottom-btn" >
+                            <a href="editAvengers.do?id=${avenger.getId()}" class="btn btn-warning" id="btnEdit">
+                                <i class="fa fa-edit"></i> Edit Hero
+                            </a>
+                            <a href="deleteAvenger.do?id=${avenger.getId()}" class="btn btn-danger" id="btnDelete">
+                                <i class="fa fa-trash"></i>Delete
+                            </a>
+                        </div>
                     </div>
                 </div>
             </c:forEach>
