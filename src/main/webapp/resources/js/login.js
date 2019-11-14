@@ -6,13 +6,29 @@
 */
 $(document).ready(function() {
     $("#btnLogin").on("click", function() {
-       $.ajax({
-        url      : "userLogin.do",
-        type     : "POST",
-        cache    : false,
-        data     : {username:$('#inputUsername').val(),password:$('#inputPassword').val()},
-        dataType : "json",
-        success  : function(results) {
+        
+        var username = $('#inputUsername').val();
+        var password = $('#inputPassword').val()
+        
+        if(username == null || username == '' && 
+                password == null || password == ''){          
+            Swal.fire({
+                    imageUrl: 'resources/images/incorrect_password.jpg',
+                    imageHeight: 100,
+                    imageAlt: 'A tall image',
+                    title: 'Empty Inputs',
+                    text: 'Please! Enter values in input!',
+                    type: 'warning'
+                })
+        }else{
+                                
+            $.ajax({
+            url      : "userLogin.do",
+            type     : "POST",
+            cache    : false,
+            data     : {username:$('#inputUsername').val(),password:$('#inputPassword').val()},
+            dataType : "json",
+            success  : function(results) {
                        if(results == true){
                            Swal.fire({
                             title: 'Welcome!',
@@ -29,15 +45,16 @@ $(document).ready(function() {
                             imageUrl: 'resources/images/incorrect_password.jpg',
                             imageHeight: 100,
                             imageAlt: 'A tall image',
-                            titel: 'Incorrect Credentials!',
+                            title: 'Incorrect Credentials!',
                             text: 'Please! Enter Valid Credentials!',
                             type: 'warning'
                         })
                        }
                    },
-        error    : function(results) {
-                       console.log("error");
-                   }
+           error    : function(results) {
+                        console.log("error");
+                    }
+                });
+            }
+        });
     });
-    });
-});

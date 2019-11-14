@@ -1,7 +1,7 @@
 <%-- 
     Document   : addAvenger
     Created on : 2-Nov-2019, 1:39:58 PM
-    Author     : Gaurav Tayade
+    Author     : tayad
 --%>
 <%@taglib prefix="mylib" uri="/WEB-INF/tlds/powersource.tld" %>
 <jsp:include page="common/header.jsp"></jsp:include>
@@ -14,19 +14,20 @@
                 <div class="row my-5">
                 <div class="col-md-3"></div>
                 <div class="col-md-6" style="background-image: url('resources/images/logo.png'); background-repeat: no-repeat; background-position: bottom right;">
-                    <h3 class="display-4 text-center text-shadow">Add Avenger</h3>
-                    <form action="addAvenger.do" method="POST" enctype="multipart/form-data">
+                    <h3 class="display-4 text-center text-shadow">Edit Avenger</h3>
+                    <form action="editAvenger.do" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="avengerUpdateId" value="${AvengerDetail.getId()}">
                         <div class="form-group">
                             <label for="avengerName">Avenger Name:</label>
-                            <input type="text"  name="avengerName" class="form-control" id="avengerName"placeholder="Enter Avenger Name">
+                            <input type="text"  name="avengerName" class="form-control" id="avengerName" value="${AvengerDetail.getName()}" placeholder="Enter Avenger Name">
                         </div>
                         <div class="form-group">
                             <label for="avengerDescription">Description</label>
-                            <input type="text" name="avengerDescription" class="form-control" id="avengerDescription" placeholder="Enter Description">
+                            <input type="text" name="avengerDescription" class="form-control" id="avengerDescription" value="${AvengerDetail.getDescription()}" placeholder="Enter Description">
                         </div>
                         <div class="form-group">
                             <label>Power Source:</label>
-                            <mylib:powerSource></mylib:powerSource>
+                            <mylib:powerSource avengerPowerSourceId="${AvengerDetail.getPowerSource().getId()}"></mylib:powerSource>
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -47,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Avenger to Team</button>
+                        <button type="submit" class="btn btn-primary">Update Avenger</button>
                     </form>
                 </div>
                 <div class="col-md-3"></div>

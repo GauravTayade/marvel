@@ -119,4 +119,27 @@ public class AvengerDb {
     
     }
     
+    public Avenger getAvenger(int avengerId){
+        
+        Avenger avenger = null;
+        
+        String getAvengerQuery = "SELECT * FROM avengers where id="+avengerId;
+        ResultSet resultSetAvenger = this.dbQuery(getAvengerQuery);
+        try{
+            while(resultSetAvenger.next()){
+                PowerSourceDb powersourceDb = new PowerSourceDb();
+                PowerSource powerSource = new PowerSource();
+                powerSource = powersourceDb.getPowerSource(resultSetAvenger.getInt(4));
+                avenger = new Avenger(resultSetAvenger.getInt(1), 
+                    resultSetAvenger.getString(2), 
+                    resultSetAvenger.getString(3), 
+                    powerSource, 
+                    resultSetAvenger.getString(5));
+            }
+        }catch(SQLException sqlex){
+        
+        }
+        return avenger;
+    }
+    
 }

@@ -44,9 +44,10 @@ public class AddAvenger extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                        
+               
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
         String imageUrl=null;
+        ServletContext context = request.getServletContext();
         
         if(isMultipartContent){
             FileItemFactory factory = new DiskFileItemFactory();
@@ -68,7 +69,7 @@ public class AddAvenger extends HttpServlet {
                         
                         //Code to check if the directory exists                        
                         String path  = getServletContext().getRealPath("/");
-                        ServletContext context = request.getServletContext();
+                        
                         context.log(path);
                         File file1 = new File(path).getParentFile().getParentFile();
                         File file= new File(file1,"/uploads//");
@@ -94,7 +95,7 @@ public class AddAvenger extends HttpServlet {
                 }
                 
             }catch(Exception ex){
-            
+                System.out.println(ex.toString());
             }
         }
 

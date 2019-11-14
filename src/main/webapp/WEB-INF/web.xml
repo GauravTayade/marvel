@@ -20,6 +20,10 @@
         <servlet-name>deleteAvenger</servlet-name>
         <servlet-class>com.sheridan.gaurav_yiqian_a2.servlets.deleteAvenger</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditAvenger</servlet-name>
+        <servlet-class>com.sheridan.gaurav_yiqian_a2.servlets.EditAvenger</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddAvenger</servlet-name>
         <url-pattern>/addAvenger.do</url-pattern>
@@ -78,6 +82,10 @@
     <servlet-mapping>
         <servlet-name>deleteAvenger</servlet-name>
         <url-pattern>/deleteAvenger.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAvenger</servlet-name>
+        <url-pattern>/editAvenger.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

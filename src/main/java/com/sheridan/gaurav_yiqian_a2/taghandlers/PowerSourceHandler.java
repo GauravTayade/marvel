@@ -25,9 +25,19 @@ public class PowerSourceHandler extends SimpleTagSupport{
 
     PowerSourceDb powersource = new PowerSourceDb();
     ArrayList<PowerSource> powerSourceList = new ArrayList<>();
-    
+    private int avengerPowerSourceId;
+
+    public int getAvengerPowerSourceId() {
+        return avengerPowerSourceId;
+    }
+
+    public void setAvengerPowerSourceId(int avengerPowerSourceId) {
+        this.avengerPowerSourceId = avengerPowerSourceId;
+    }
+        
     @Override
     public void doTag() throws JspException, IOException {
+           
         
         powerSourceList.clear();
         powerSourceList = powersource.getPowerSources();
@@ -42,7 +52,11 @@ public class PowerSourceHandler extends SimpleTagSupport{
             out.println("<select class=\"form-control\" name=\"powerSource\">");
             out.println("<option value=\"\">Select Powersource</option>");
             for (PowerSource powerSource : powerSourceList) {
-                out.println("<option value="+powerSource.getId()+">"+powerSource.getDescription()+"</option>");
+                if(this.getAvengerPowerSourceId() == powerSource.getId()){
+                    out.println("<option value="+powerSource.getId()+" selected>"+powerSource.getDescription()+"</option>");
+                }else{
+                    out.println("<option value="+powerSource.getId()+">"+powerSource.getDescription()+"</option>");
+                }
             }
             out.println("</select>");
         }catch(java.io.IOException ioex){

@@ -22,7 +22,7 @@
                         <h5 class="card-title text-center">Power Source:</h5>
                         <p class="card-text card-text-maargin-bottom">${avenger.getPowerSource().getDescription()}</p>
                         <div class="col-md-11 bottom-btn" >
-                            <a href="editAvengers.do?id=${avenger.getId()}" class="btn btn-warning" id="btnEdit">
+                            <a href="editAvenger.do?avengerId=${avenger.getId()}" class="btn btn-warning" id="btnEdit">
                                 <i class="fa fa-edit"></i> Edit Hero
                             </a>
                             <a href="deleteAvenger.do?id=${avenger.getId()}" class="btn btn-danger" id="btnDelete">

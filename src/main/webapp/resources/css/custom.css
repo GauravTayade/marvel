@@ -142,5 +142,9 @@ html, body {
     left: 0;
     z-index: -1;
 }
-
 /*particle js ends here*/
+
+.icon-white{
+    color: #fff;
+}
+

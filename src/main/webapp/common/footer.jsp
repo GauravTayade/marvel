@@ -6,20 +6,44 @@
 <footer class="bg-dark text-white">
         <div class="row  mr-0">
             <div class="col-md-12 text-center pt-5 pb-5">
-                Created with <span style="color: #e25555;">&hearts;</span>  By Gaurav Tayade
+                <h5>Developed with <br/> 
+                    <i class="fas fa-hand-holding-heart fa-2x mt-2 mb-2" style="color: #e25555;"></i> </br>
+<!--                    <span style="color: #e25555;">&hearts;</span> </br> -->
+                    By
+                </h5>
             </div>
-            <div class="col-md-12 text-center">
+            <div class="col-md-6 text-center border-right border-success">
+                <div class="col-md-12 text-center text-white mb-5">
+                    <h4>Gaurav Tayade</h4>
+                </div>
                 <a href="https://www.facebook.com/gaurav.tayade.33" target="_blank">
-                    <i class="fab fa-facebook fa-4x mx-5 mb-4"></i>
+                    <i class="fab fa-facebook fa-2x mx-5 mb-4 icon-white"></i>
                 </a>
                 <a href="https://www.instagram.com/the_byr0n/" target="_blank">
-                    <i class="fab fa-instagram fa-4x mx-5 mb-4"></i>
+                    <i class="fab fa-instagram fa-2x mx-5 mb-4 icon-white"></i>
                 </a>
                 <a href="https://github.com/GauravTayade" target="_blank">
-                    <i class="fab fa-github fa-4x mx-5 mb-4"></i>
+                    <i class="fab fa-github fa-2x mx-5 mb-4 icon-white"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/gaurav-tayade/" target="_blank">
-                    <i class="fab fa-linkedin fa-4x mx-5 mb-4"></i>
+                    <i class="fab fa-linkedin fa-2x mx-5 mb-4 icon-white"></i>
+                </a>
+            </div>
+            <div class="col-md-6 text-center">
+                <div class="col-md-12 text-center text-white mb-5">
+                    <h4>Yiqian Chang</h4>
+                </div>
+                <a href="https://www.facebook.com/gaurav.tayade.33" target="_blank">
+                    <i class="fab fa-facebook fa-2x mx-5 mb-4 icon-white"></i>
+                </a>
+                <a href="https://www.instagram.com/the_byr0n/" target="_blank">
+                    <i class="fab fa-instagram fa-2x mx-5 mb-4 icon-white"></i>
+                </a>
+                <a href="https://github.com/GauravTayade" target="_blank">
+                    <i class="fab fa-github fa-2x mx-5 mb-4 icon-white"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/gaurav-tayade/" target="_blank">
+                    <i class="fab fa-linkedin fa-2x mx-5 mb-4 icon-white"></i>
                 </a>
             </div>
         </div>
@@ -46,7 +70,7 @@
                                     <i class="fa fa-user"></i>
                                 </div>
                                 <div class="from-input col-md-10">
-                                    <input type="text" name="username" placeholder="Username" class="form-control" id="inputUsername" autofocus>
+                                    <input type="text" name="username" placeholder="Username" class="form-control" id="inputUsername" required="required" autofocus>
                                 </div>
                             </div>                        
                         </div>
@@ -56,7 +80,7 @@
                                     <i class="fa fa-key"></i>
                                 </div>
                                 <div class="form-input col-md-10">
-                                    <input type="password" name="password" placeholder="*******" class="form-control" id="inputPassword">
+                                    <input type="password" name="password" placeholder="*******" class="form-control" id="inputPassword" required="required">
                                 </div>
                             </div>
                         </div>

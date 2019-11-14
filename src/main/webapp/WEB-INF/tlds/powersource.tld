@@ -7,5 +7,9 @@
         <name>powerSource</name>
         <tag-class>com.sheridan.gaurav_yiqian_a2.taghandlers.PowerSourceHandler</tag-class>
         <body-content>tagdependent</body-content>
+        <attribute>
+            <name>avengerPowerSourceId</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 </taglib>
