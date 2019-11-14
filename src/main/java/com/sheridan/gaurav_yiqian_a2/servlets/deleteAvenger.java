@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sheridan.gaurav_yiqian_a2.model.AvengerDb;
 import javax.servlet.RequestDispatcher;
+import javax.json.JsonObject;
 
 /**
  *
@@ -36,7 +37,7 @@ public class deleteAvenger extends HttpServlet {
             
 //            RequestDispatcher rd = request.getRequestDispatcher("deleteSuccess.jsp");
 //            rd.forward(request, response);
-            response.sendRedirect("deleteSuccess.jsp");
+            //response.sendRedirect("deleteSuccess.jsp");
         }
         
    } 

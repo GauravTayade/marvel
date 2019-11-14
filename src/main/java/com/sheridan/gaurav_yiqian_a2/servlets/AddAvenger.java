@@ -13,7 +13,6 @@ import com.sheridan.gaurav_yiqian_a2.model.PowerSourceDb;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -56,11 +55,7 @@ public class AddAvenger extends HttpServlet {
             try{
                 List<FileItem> fields = upload.parseRequest(request);
                 Iterator<FileItem> it = fields.iterator();
-                
-//                ServletContext context = request.getServletContext();
-//                File file = new File(".");
-//                context.log(file.getCanonicalPath());
-                
+                                
                 while(it.hasNext()){
                     FileItem fileItem = it.next();
                     if (fileItem.isFormField()) {
@@ -83,7 +78,7 @@ public class AddAvenger extends HttpServlet {
                         
                         //uploadPath = "D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
                         //imageUrl="resources\\images\\heros-profile\\"+ fileItem.getName();
-                        uploadPath = file.getPath()+"\\src\\main\\webapp\\resources\\images\\heros-profile\\"+fileItem.getName();
+                        uploadPath = file1.getPath()+"\\src\\main\\webapp\\resources\\images\\heros-profile\\"+fileItem.getName();
                         imageUrl = "resources\\images\\heros-profile\\"+fileItem.getName();
                         
                         try{
@@ -98,16 +93,19 @@ public class AddAvenger extends HttpServlet {
                 System.out.println(ex.toString());
             }
         }
-
+        context.log("worked");
         //get powersource;
         powersource = new PowerSource();
         PowerSourceDb powerSourceDb = new PowerSourceDb();
         powersource = powerSourceDb.getPowerSource(Integer.parseInt(fieldsHash.get("powerSource")));
+        context.log(powersource.getDescription());
         
         Avenger avenger = new Avenger(fieldsHash.get("avengerName"), fieldsHash.get("avengerDescription"), powersource, imageUrl);
         if(avengerdb.addAvenger(avenger) >  0){
             RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
             rd.forward(request, response);
+        }else{
+            context.log("failed");
         }
         
     }

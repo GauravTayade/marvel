@@ -25,7 +25,8 @@
                             <a href="editAvenger.do?avengerId=${avenger.getId()}" class="btn btn-warning" id="btnEdit">
                                 <i class="fa fa-edit"></i> Edit Hero
                             </a>
-                            <a href="deleteAvenger.do?id=${avenger.getId()}" class="btn btn-danger" id="btnDelete">
+<!--                            <a href="deleteAvenger.do?id=${avenger.getId()}" data-avengerId="${avenger.getId()}" class="btn btn-danger" id="btnDelete">-->
+                            <a href="#" data-avengerId="${avenger.getId()}" class="btn btn-danger btnDelete">
                                 <i class="fa fa-trash"></i>Delete
                             </a>
                         </div>

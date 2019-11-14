@@ -6,13 +6,11 @@
 */
 package com.sheridan.gaurav_yiqian_a2.model;
 
-import java.io.PrintWriter;
+import com.sheridan.gaurav_yiqian_a2.database.Db;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -22,59 +20,62 @@ import java.util.ArrayList;
 public class AvengerDb {
     
     PowerSourceDb pwsDb = new PowerSourceDb();
+    Db db = new Db();
     
-    public Connection sqlconnection(){
+//    public Connection sqlconnection(){
+//    
+//        String driver = "org.postgresql.Driver";
+//        String connURL = "jdbc:postgresql://localhost/MyDb";
+//        String username ="postgres";
+//        String password =  "root";
+//        Connection conn = null;
+//        
+//         try{
+//            Class.forName(driver).newInstance();
+//        
+//            conn = DriverManager.getConnection(connURL,username,password);
+//        }catch(Exception ex){
+//             System.out.println("ex"+ex);
+//        }
+//    
+//         return conn;
+//    }
     
-        String driver = "org.postgresql.Driver";
-        String connURL = "jdbc:postgresql://localhost/MyDb";
-        String username ="postgres";
-        String password =  "root";
-        Connection conn = null;
-        
-         try{
-            Class.forName(driver).newInstance();
-        
-            conn = DriverManager.getConnection(connURL,username,password);
-        }catch(Exception ex){
-             System.out.println("ex"+ex);
-        }
-    
-         return conn;
-    }
-    
-    public ResultSet dbQuery(String queryString){
-        
-        Connection sqlconnection = this.sqlconnection();
-        String query = queryString;
-        ResultSet rs = null;
-               System.out.println(query);
-        try{
-            Statement stmt = sqlconnection.createStatement();
-            rs = stmt.executeQuery(query);
-        }catch(SQLException sqlex){
-            System.out.println(sqlex);
-        }
-      return rs;
-    }
+//    public ResultSet dbQuery(String queryString){
+//        
+//        Connection sqlconnection = db.getConnection();
+//        String query = queryString;
+//        ResultSet rs = null;
+//               System.out.println(query);
+//        try{
+//            Statement stmt = sqlconnection.createStatement();
+//            rs = stmt.executeQuery(query);
+//        }catch(SQLException sqlex){
+//            System.out.println(sqlex);
+//        }
+//      return rs;
+//    }
     
     private ArrayList<Avenger> avengersList = new ArrayList<>();
     
     public int addAvenger(Avenger avenger){
     
         int result = 0;
-        String insertQuery =  "INSERT INTO avengers (\"avengername\",\"description\",\"powersource\",\"img\") "
-                        + "VALUES ('"+avenger.getName()+"',"
-                        + "'"+avenger.getDescription()+"',"
-                        + "'"+avenger.getPowerSource().getId()+"',"
-                        + "'"+avenger.getImgURL()+"')";
         
-        Connection sqlconnection = this.sqlconnection();
+        String insertQuery = "INSERT INTO avengers (\"avengername\",\"description\",\"powersource\",\"img\")"
+                +"VALUES(?,?,?,?)"; 
+        Connection sqlconnection = db.getConnection();
         try{
-            System.out.println(insertQuery);
-            Statement statement = sqlconnection.createStatement();
-            result = statement.executeUpdate(insertQuery);
+            PreparedStatement statement = sqlconnection.prepareStatement(insertQuery);
+            statement.setString(1,avenger.getName());
+            statement.setString(2,avenger.getDescription());
+            statement.setInt(3,avenger.getPowerSource().getId());
+            statement.setString(4,avenger.getImgURL());
+            
+            result = statement.executeUpdate();
+            
         }catch(SQLException sqlex){
-        
+            System.out.println(sqlex.toString());
         }
         
         return result;
@@ -83,18 +84,20 @@ public class AvengerDb {
     public int removeAvenger(int id){
         
         int result=0 ;
-        Connection conn = this.sqlconnection();
-        PreparedStatement prestatment=null;
+        Connection sqlconnection = db.getConnection();
+        PreparedStatement statment=null;
         
         try{
-            String removeAvengersQuery = "DELETE FROM avengers Where id="+id;
-            prestatment = conn.prepareStatement(removeAvengersQuery);
-            
-            System.out.println(removeAvengersQuery);
-
-            result = prestatment.executeUpdate();
+            String removeAvengersQuery = "DELETE FROM avengers Where id=?";
+            statment = sqlconnection.prepareStatement(removeAvengersQuery);
+            statment.setInt(1, id);
+ 
+            result = statment.executeUpdate();
+ 
         }catch(SQLException sqlex){
+        
             System.out.println(sqlex);
+        
         }
         
         return result;
@@ -102,30 +105,42 @@ public class AvengerDb {
     
     public ArrayList<Avenger> getAvengers(){
     
+        Connection sqlconnection = db.getConnection();
+        ResultSet resultSetAvengers=null;
+                
         String getAvengersQuery = "SELECT * FROM avengers";
-        ResultSet resultSetAvengers = this.dbQuery(getAvengersQuery);
-        avengersList.clear();
         try{
+            PreparedStatement statement = sqlconnection.prepareStatement(getAvengersQuery);        
+            resultSetAvengers = statement.executeQuery();
+            
+            avengersList.clear();
+            
             while(resultSetAvengers.next()){
                 
                 PowerSource avengerPowerSource = pwsDb.getPowerSource(resultSetAvengers.getInt(4));
                 avengersList.add(new Avenger(resultSetAvengers.getInt(1),resultSetAvengers.getString(2),resultSetAvengers.getString(3),avengerPowerSource,resultSetAvengers.getString(5)));
             }
         }catch(SQLException sqlex){
-        
-        }
-        
+            System.out.println(sqlex.toString());
+        }    
+          
         return avengersList;
     
     }
     
     public Avenger getAvenger(int avengerId){
-        
+   
+        Connection sqlconConnection = db.getConnection();
         Avenger avenger = null;
-        
-        String getAvengerQuery = "SELECT * FROM avengers where id="+avengerId;
-        ResultSet resultSetAvenger = this.dbQuery(getAvengerQuery);
+        ResultSet resultSetAvenger;
+                
         try{
+            String getAvengerQuery = "SELECT * FROM avengers where id=?";
+            PreparedStatement statement = sqlconConnection.prepareStatement(getAvengerQuery);
+            statement.setInt(1,avengerId);
+        
+            resultSetAvenger = statement.executeQuery();
+        
             while(resultSetAvenger.next()){
                 PowerSourceDb powersourceDb = new PowerSourceDb();
                 PowerSource powerSource = new PowerSource();
@@ -137,7 +152,7 @@ public class AvengerDb {
                     resultSetAvenger.getString(5));
             }
         }catch(SQLException sqlex){
-        
+            System.out.println(sqlex.toString());
         }
         return avenger;
     }
