@@ -3,6 +3,7 @@
     Created on : 2-Nov-2019, 1:39:58 PM
     Author     : tayad
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="mylib" uri="/WEB-INF/tlds/powersource.tld" %>
 <jsp:include page="common/header.jsp"></jsp:include>
     <div class="row m-5">
@@ -44,7 +45,14 @@
                                     </div> 
                                 </div>
                                 <div class="col-md-6">
+                                <c:choose>
+                                <c:when test="${AvengerDetail.getImgURL()}">
+                                    <img src="${AvengerDetail.getImgURL()}" style="height:250px;width:250px;" class="rounded img-fluid box-shadow" id="avengerImagePreview">
+                                </c:when>
+                                <c:otherwise>    
                                     <img src="resources/images/image-preview.png" style="height:250px;width:250px;" class="rounded img-fluid box-shadow" id="avengerImagePreview">
+                                </c:otherwise>
+                                </c:choose>
                                 </div>
                             </div>
                         </div>
