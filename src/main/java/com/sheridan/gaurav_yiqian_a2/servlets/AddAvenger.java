@@ -65,8 +65,26 @@ public class AddAvenger extends HttpServlet {
                     if (fileItem.isFormField()) {
                         fieldsHash.put(fileItem.getFieldName(), fileItem.getString());
                     } else {
-                        uploadPath = "D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
-                        imageUrl="resources\\images\\heros-profile\\"+ fileItem.getName();
+                        
+                        //Code to check if the directory exists                        
+                        String path  = getServletContext().getRealPath("/");
+                        ServletContext context = request.getServletContext();
+                        context.log(path);
+                        File file1 = new File(path).getParentFile().getParentFile();
+                        File file= new File(file1,"/uploads//");
+                        
+                        context.log("new path after change:"+file.getPath()+"\\");
+                        if(!file.isDirectory()){
+                            context.log("directory does not exists");
+                            file.mkdir();
+                            context.log("directory created");
+                        }
+                        
+                        //uploadPath = "D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
+                        //imageUrl="resources\\images\\heros-profile\\"+ fileItem.getName();
+                        uploadPath = file.getPath()+"\\src\\main\\webapp\\resources\\images\\heros-profile\\"+fileItem.getName();
+                        imageUrl = "resources\\images\\heros-profile\\"+fileItem.getName();
+                        
                         try{
                             fileItem.write(new File(uploadPath));
                         }catch(Exception ex){

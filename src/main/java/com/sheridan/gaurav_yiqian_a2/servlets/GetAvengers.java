@@ -36,14 +36,8 @@ public class GetAvengers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        String path  = getServletContext().getRealPath("/");
-        ServletContext context = request.getServletContext();
-        context.log(path);
-        File file = new File(path).getParentFile().getParentFile();
-        context.log("new path:"+file.getPath());
-        if(!file.isDirectory()){
-            context.log("directory does not exists");
-        }
+         //Code to check if the directory exists                        
+                       
         
 //        if(!Files.exists(Paths.get(path))){
 //            context.log("directory does not exists");
