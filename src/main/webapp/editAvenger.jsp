@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-md-6">
                                 <c:choose>
-                                <c:when test="${AvengerDetail.getImgURL()}">
+                                <c:when test="${not empty AvengerDetail.getImgURL()}">
                                     <img src="${AvengerDetail.getImgURL()}" style="height:250px;width:250px;" class="rounded img-fluid box-shadow" id="avengerImagePreview">
                                 </c:when>
                                 <c:otherwise>    
