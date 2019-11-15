@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sheridan.gaurav_yiqian_a2.model.User;
-
+import com.sheridan.gaurav_yiqian_a2.model.UserDb;
+import javax.servlet.ServletContext;
 /**
  *
  * @author tayad
@@ -27,18 +28,24 @@ public class UserLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+        boolean result = false;
         username = request.getParameter("username");
         password = request.getParameter("password");
+        ServletContext context = request.getServletContext();
         
         if(!username.isEmpty() && !password.isEmpty()){
-            User user = new User();
-            boolean result = user.loginCheck(username, password);
+            UserDb userDb = new UserDb();
+            try{
+                result = userDb.loginCheck(username, password);
+            }catch(Exception ex){
+                context.log(ex.toString());
+            }
             
             if(result == true){
                 
                 HttpSession userSession = request.getSession(false);
                 if (userSession.getAttribute("user") == null || userSession.getAttribute("user").equals("")){
-                    userSession.setAttribute("user",new User(username));
+                    userSession.setAttribute("user",userDb.getUser());
                 }
                 
             }

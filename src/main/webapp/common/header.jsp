@@ -34,7 +34,7 @@
                     <c:choose>
                         <c:when test="${sessionScope.user.getUsername()!=null}">
                             <li class="nav-item">
-                                <a class="nav-link" href="#"> Hello <c:out value="${sessionScope.user.getUsername().toUpperCase()}"></c:out> !</a>
+                                <a class="nav-link" href="#"> Hello <c:out value="${sessionScope.user.getFullname()}"></c:out> !</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="addAvenger.jsp">Add Avenger</a>
