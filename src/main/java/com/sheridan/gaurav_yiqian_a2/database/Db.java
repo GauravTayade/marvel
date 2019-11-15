@@ -17,20 +17,15 @@ public class Db {
   
     DbProperties dbProp = new DbProperties();
     private Connection con;
-
-    public Db() {
-    }
     
-    public Connection getConnection(){
+    public Connection getConnection() throws Exception{
         
         try{
             Class.forName(dbProp.getDriver()).newInstance();
             
             con = DriverManager.getConnection(dbProp.getConnectionURL(),dbProp.getUsername(),dbProp.getPassword());
-        }catch(SQLException sqlex){
-            System.out.println(sqlex.toString());
         }catch(Exception ex){
-            System.out.println(ex.toString());
+            throw new Exception(ex.toString());
         }
         
         return con;

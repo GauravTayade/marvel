@@ -42,12 +42,14 @@ public class GetAvengers extends HttpServlet {
 //        if(!Files.exists(Paths.get(path))){
 //            context.log("directory does not exists");
 //        }
-        
+        try{
         avengersList = avengersDetails.getAvengers();
         request.setAttribute("avengersList",avengersList);
         System.out.println(avengersList.size());
         RequestDispatcher rd = request.getRequestDispatcher("displayAvengers.jsp");
         rd.forward(request, response);
-        
+        }catch(Exception ex){
+            System.out.println(ex.toString());
+        }
     }     
 }

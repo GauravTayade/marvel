@@ -16,7 +16,7 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6" style="background-image: url('resources/images/logo.png'); background-repeat: no-repeat; background-position: bottom right;">
                     <h3 class="display-4 text-center text-shadow">Edit Avenger</h3>
-                    <form action="editAvenger.do" method="POST" enctype="multipart/form-data">
+                    <form action="updateAvenger.do" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="avengerUpdateId" value="${AvengerDetail.getId()}">
                         <div class="form-group">
                             <label for="avengerName">Avenger Name:</label>

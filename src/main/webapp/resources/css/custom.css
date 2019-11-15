@@ -104,7 +104,7 @@ and open the template in the editor.
 
 .hero-card:hover {
     box-shadow: grey 8px 8px 8px;
-    background-image: url('../images/card-bg-2.jpg');
+/*    background-image: url('../images/card-bg-2.jpg');*/
     background-position: center;
     background-attachment: inherit;
     background-size: cover;

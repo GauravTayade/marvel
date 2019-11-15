@@ -95,6 +95,7 @@ public class AddAvenger extends HttpServlet {
         }
         context.log("worked");
         //get powersource;
+        try{
         powersource = new PowerSource();
         PowerSourceDb powerSourceDb = new PowerSourceDb();
         powersource = powerSourceDb.getPowerSource(Integer.parseInt(fieldsHash.get("powerSource")));
@@ -106,6 +107,8 @@ public class AddAvenger extends HttpServlet {
             rd.forward(request, response);
         }else{
             context.log("failed");
+        }
+        }catch(Exception ex){
         }
         
     }

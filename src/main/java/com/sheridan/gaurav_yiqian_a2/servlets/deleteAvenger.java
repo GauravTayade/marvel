@@ -28,7 +28,7 @@ public class deleteAvenger extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
+       try{
         if(!request.getParameter("id").isEmpty()){
             avengerId = Integer.parseInt(request.getParameter("id"));
             log(request.getParameter("id"));
@@ -39,6 +39,9 @@ public class deleteAvenger extends HttpServlet {
 //            rd.forward(request, response);
             //response.sendRedirect("deleteSuccess.jsp");
         }
+       }catch(Exception ex){
+       
+       }
         
    } 
 }

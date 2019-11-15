@@ -18,7 +18,16 @@ import com.sheridan.gaurav_yiqian_a2.model.Avenger;
 import com.sheridan.gaurav_yiqian_a2.model.AvengerDb;
 import com.sheridan.gaurav_yiqian_a2.model.PowerSource;
 import com.sheridan.gaurav_yiqian_a2.model.PowerSourceDb;
+import java.io.File;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -26,25 +35,27 @@ import javax.servlet.RequestDispatcher;
  */
 public class EditAvenger extends HttpServlet {
 
-    int avengerId;
+    int avengerId,avengerUpdateId;
     ServletContext context;
     AvengerDb avengerDb = new AvengerDb();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(!request.getParameterMap().containsKey("avengerUpdateId")){
+       
+        
             avengerId = Integer.parseInt(request.getParameter("avengerId"));
             context = request.getServletContext();
             context.log(request.getParameter("avengerId"));
-        
-            Avenger avenger = avengerDb.getAvenger(avengerId);
-        
+            Avenger avenger = null;
+            try{
+                avenger = avengerDb.getAvenger(avengerId);
+            }catch(Exception ex){
+                context.log(ex.toString());
+            }
             request.setAttribute("AvengerDetail", avenger);
             RequestDispatcher rd = request.getRequestDispatcher("editAvenger.jsp");
             rd.forward(request, response);
-        }else{
-            
-        }
+        
     }
 
 }

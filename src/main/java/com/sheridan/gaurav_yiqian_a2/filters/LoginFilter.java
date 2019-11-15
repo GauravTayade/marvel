@@ -46,12 +46,14 @@ public class LoginFilter implements Filter{
 	this.context.log("Requested Resource::"+uriParts[uriParts.length-1]);
 		
 	HttpSession userSession = servletRequest.getSession(false);
-        
+        context.log(uriParts[uriParts.length-1]);
         if((uriParts[uriParts.length-1].equals("addAvenger.jsp") &&
                 userSession.getAttribute("user") == null)||
-                (uriParts[uriParts.length-1].equals("addAvengr.do") &&
+                (uriParts[uriParts.length-1].equals("addAvenger.do") &&
+                userSession.getAttribute("user") == null)||
+                (uriParts[uriParts.length-2].equals("editAvenger.do") &&
                 userSession.getAttribute("user") == null)){
-            this.context.log("session checked");
+                this.context.log("session checked");
             servletResponse.sendRedirect("index.jsp");
             return;
         }else if((uriParts[uriParts.length-1].equals("displayAvengers.jsp") &&

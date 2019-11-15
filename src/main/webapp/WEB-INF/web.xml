@@ -24,6 +24,10 @@
         <servlet-name>EditAvenger</servlet-name>
         <servlet-class>com.sheridan.gaurav_yiqian_a2.servlets.EditAvenger</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateAvenger</servlet-name>
+        <servlet-class>com.sheridan.gaurav_yiqian_a2.servlets.UpdateAvenger</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddAvenger</servlet-name>
         <url-pattern>/addAvenger.do</url-pattern>
@@ -64,7 +68,7 @@
         <!-- mandatory -->
         <url-pattern>/displayAvengers.jsp</url-pattern>
         <!-- either url-pattern or servlet-name is mandatory -->
-        <servlet-name>GetAvengers</servlet-name>
+        <!--        <servlet-name>GetAvengers</servlet-name>-->
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <error-page>
@@ -86,6 +90,10 @@
     <servlet-mapping>
         <servlet-name>EditAvenger</servlet-name>
         <url-pattern>/editAvenger.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAvenger</servlet-name>
+        <url-pattern>/updateAvenger.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

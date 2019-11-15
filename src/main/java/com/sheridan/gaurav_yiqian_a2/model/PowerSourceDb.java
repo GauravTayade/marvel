@@ -22,30 +22,8 @@ public class PowerSourceDb {
     private ArrayList<PowerSource> powerSourceList = new ArrayList<>();
     private PowerSource powerSource;
     Db db = new Db();
-    
-//    public ResultSet dbQuery(String queryString){
-//        
-//        String driver = "org.postgresql.Driver";
-//        String connURL = "jdbc:postgresql://localhost/MyDb";
-//        String username ="postgres";
-//        String password =  "root";
-//        Connection conn = null;
-//        String query = queryString;
-//        ResultSet rs = null;
-//      
-//        try{   
-//            Class.forName(driver).newInstance();
-//            conn = DriverManager.getConnection(connURL,username,password);
-//            Statement stmt = conn.createStatement();
-//            rs = stmt.executeQuery(query);
-//        }catch(Exception ex){
-//            System.out.println(ex);
-//        }
-//       
-//      return rs;
-//    }
         
-    public PowerSource getPowerSource(int id){
+    public PowerSource getPowerSource(int id) throws Exception{
         
         Connection sqlconConnection = db.getConnection();
         ResultSet resultSetPowerSource;
@@ -60,14 +38,14 @@ public class PowerSourceDb {
             while(resultSetPowerSource.next()){
                 powerSource = new PowerSource(resultSetPowerSource.getInt("id"),resultSetPowerSource.getString("description"));
             }
-        }catch(SQLException sqlex){
-            System.out.println(sqlex.toString());
+        }catch(Exception ex){
+            throw new Exception(ex.toString());
         }
         
         return powerSource;
     }
     
-    public ArrayList<PowerSource> getPowerSources(){
+    public ArrayList<PowerSource> getPowerSources() throws Exception{
         
         Connection sqlconnection = db.getConnection();
         ResultSet resultSetPowerSources;
@@ -81,9 +59,10 @@ public class PowerSourceDb {
             while(resultSetPowerSources.next()){
                 powerSourceList.add(new PowerSource(resultSetPowerSources.getInt(1),resultSetPowerSources.getString(2)));
             }
-        }catch(SQLException sqlex){
-            System.out.println(sqlex.toString());
+        }catch(Exception ex){
+            throw new Exception(ex.toString());
         }
+        
         return powerSourceList;
     }
     

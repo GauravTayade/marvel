@@ -38,10 +38,11 @@ public class PowerSourceHandler extends SimpleTagSupport{
     @Override
     public void doTag() throws JspException, IOException {
            
-        
+        try{
         powerSourceList.clear();
         powerSourceList = powersource.getPowerSources();
-        
+        }catch(Exception ex){
+        }
         JspWriter out = getJspContext().getOut();
         
         try{
