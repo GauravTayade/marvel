@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" type="image/png" sizes="32x32" href="resources/images/favicon/favicon-32x32.png">
+<!--        <link rel="icon" type="image/png" sizes="32x32" href="resources/images/favicon/favicon-32x32.png">-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Avenger Universe</title>
          <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">

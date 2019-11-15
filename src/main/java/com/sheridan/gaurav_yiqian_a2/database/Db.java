@@ -20,14 +20,28 @@ public class Db {
     
     public Connection getConnection() throws Exception{
         
-        try{
-            Class.forName(dbProp.getDriver()).newInstance();
-            
-            con = DriverManager.getConnection(dbProp.getConnectionURL(),dbProp.getUsername(),dbProp.getPassword());
-        }catch(Exception ex){
-            throw new Exception(ex.toString());
-        }
+        String DbUrl = System.getenv("JDBC_DATABASE_URL");
         
+        if(DbUrl!=null && DbUrl.length() >0 ){
+            
+            try{
+                Class.forName(dbProp.getDriver()).newInstance();
+                
+                con=DriverManager.getConnection(DbUrl);
+            }catch(Exception ex){
+                throw new Exception(ex.toString());
+            }
+            
+        }else{
+            try{
+                Class.forName(dbProp.getDriver()).newInstance();
+            
+                con = DriverManager.getConnection(dbProp.getConnectionURL(),dbProp.getUsername(),dbProp.getPassword());
+            }catch(Exception ex){
+                throw new Exception(ex.toString());
+            }
+        }
+                
         return con;
     }
     
