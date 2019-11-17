@@ -7,7 +7,7 @@
 package com.sheridan.gaurav_yiqian_a2.model;
 
 import java.io.Serializable;
-import com.sheridan.gaurav_yiqian_a2.model.PowerSource;
+
 /**
  *
  * @author tayad

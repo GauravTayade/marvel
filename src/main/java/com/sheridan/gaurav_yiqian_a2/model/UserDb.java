@@ -24,14 +24,15 @@ public class UserDb {
     public boolean loginCheck(String username, String password)throws Exception{
     
         String sqlUserSelect;
+        Connection sqlConnection = db.getConnection();
+        
+        sqlUserSelect = "select * from users where username=?";
+        PreparedStatement statement = sqlConnection.prepareStatement(sqlUserSelect);
+        statement.setString(1, username);
+        
         try{
-            Connection sqlConnection = db.getConnection();
-            sqlUserSelect = "select * from users where username=?";
-            PreparedStatement statement = sqlConnection.prepareStatement(sqlUserSelect);
-            statement.setString(1, username);
-            
+        
             ResultSet resultUsers = statement.executeQuery();
-            
             
             if(resultUsers.next()){
                 if(resultUsers.getString(5).equals(password)){
@@ -44,6 +45,8 @@ public class UserDb {
             
         }catch(SQLException sqlex){
             throw new SQLException(sqlex.toString());
+        }finally{
+            sqlConnection.close();
         }
         
         return isUser;

@@ -67,9 +67,10 @@ public class AddAvenger extends HttpServlet {
                         
                         context.log(path);
                         File file1 = new File(path).getParentFile().getParentFile();
-                        File file= new File(file1,"/uploads//");
-                        
-                        context.log("new path after change:"+file.getPath()+"\\");
+                        //File file1 = new File(path);
+                        File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
+                        //File file = new File(file1,"/resources/images/heros-profile/");
+                        context.log("new path after change:"+file.getPath());
                         if(!file.isDirectory()){
                             context.log("directory does not exists");
                             file.mkdir();
@@ -78,19 +79,22 @@ public class AddAvenger extends HttpServlet {
                         
                         //uploadPath = "D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
                         //imageUrl="resources\\images\\heros-profile\\"+ fileItem.getName();
-                        uploadPath = file1.getPath()+"\\src\\main\\webapp\\resources\\images\\heros-profile\\"+fileItem.getName();
-                        imageUrl = "resources\\images\\heros-profile\\"+fileItem.getName();
+                        uploadPath = file1.getPath()+"/src/main/webapp/resources/images/heros-profile/"+fileItem.getName();
+                        //uploadPath = file1.getPath()+"/resources/images/heros-profile/"+fileItem.getName();
+                        imageUrl = "resources/images/heros-profile/"+fileItem.getName();
+                        
+                        context.log(uploadPath);
                         
                         try{
                             fileItem.write(new File(uploadPath));
                         }catch(Exception ex){
-                            System.out.println(ex);
+                           context.log(ex.toString());
                         }
                     }
                 }
                 
             }catch(Exception ex){
-                System.out.println(ex.toString());
+                context.log(ex.toString());
             }
         }
         context.log("worked");

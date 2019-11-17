@@ -27,19 +27,20 @@ public class PowerSourceDb {
         
         Connection sqlconConnection = db.getConnection();
         ResultSet resultSetPowerSource;
-        
-        try{
+       
         String getPowerSourcesQuery = "SELECT * FROM powersource where id=?";
         PreparedStatement statement = sqlconConnection.prepareStatement(getPowerSourcesQuery);
         statement.setInt(1, id);
         
-        resultSetPowerSource = statement.executeQuery();
-        
+        try{
+            resultSetPowerSource = statement.executeQuery();
             while(resultSetPowerSource.next()){
                 powerSource = new PowerSource(resultSetPowerSource.getInt("id"),resultSetPowerSource.getString("description"));
             }
-        }catch(Exception ex){
+        }catch(SQLException ex){
             throw new Exception(ex.toString());
+        }finally{
+            sqlconConnection.close();
         }
         
         return powerSource;
@@ -50,16 +51,16 @@ public class PowerSourceDb {
         Connection sqlconnection = db.getConnection();
         ResultSet resultSetPowerSources;
         
+        String getPowerSourcesQuery = "SELECT * FROM powersource";
+        PreparedStatement statement = sqlconnection.prepareStatement(getPowerSourcesQuery);
+        
         try{
-            String getPowerSourcesQuery = "SELECT * FROM powersource";
-            PreparedStatement statement = sqlconnection.prepareStatement(getPowerSourcesQuery);
-            
             resultSetPowerSources = statement.executeQuery();
         
             while(resultSetPowerSources.next()){
                 powerSourceList.add(new PowerSource(resultSetPowerSources.getInt(1),resultSetPowerSources.getString(2)));
             }
-        }catch(Exception ex){
+        }catch(SQLException ex){
             throw new Exception(ex.toString());
         }
         

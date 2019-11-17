@@ -15,6 +15,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import com.sheridan.gaurav_yiqian_a2.model.PowerSourceDb;
 import com.sheridan.gaurav_yiqian_a2.model.PowerSource;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -38,11 +39,16 @@ public class PowerSourceHandler extends SimpleTagSupport{
     @Override
     public void doTag() throws JspException, IOException {
            
-        try{
         powerSourceList.clear();
-        powerSourceList = powersource.getPowerSources();
+        
+        try{
+       
+            powerSourceList = powersource.getPowerSources();
+        
         }catch(Exception ex){
+            System.out.println(ex.toString());
         }
+        
         JspWriter out = getJspContext().getOut();
         
         try{
@@ -59,9 +65,13 @@ public class PowerSourceHandler extends SimpleTagSupport{
                     out.println("<option value="+powerSource.getId()+">"+powerSource.getDescription()+"</option>");
                 }
             }
+            
             out.println("</select>");
+            
         }catch(java.io.IOException ioex){
+            
             throw new JspException("error in powersource tag"+ioex.toString());
+        
         }
         
     }
