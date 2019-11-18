@@ -40,33 +40,38 @@ public class UpdateAvenger extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = request.getServletContext();
         
+            //parsing multipart request to check if it is multipart or not
             boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
             String imageUrl=null;
             String uploadPath;
+            //create hashmap to store values
             HashMap<String, String> fieldsHash = new HashMap<>();
             
             PowerSource powersource = new PowerSource();
             PowerSourceDb powerSourceDb = new PowerSourceDb();
             
+            // cheeck if the request is multipart
             if(isMultipartContent){
-            FileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
+                FileItemFactory factory = new DiskFileItemFactory();
+                ServletFileUpload upload = new ServletFileUpload(factory);
             
-            try{
-                List<FileItem> fields = upload.parseRequest(request);
-                Iterator<FileItem> it = fields.iterator();
+                try{
+                    List<FileItem> fields = upload.parseRequest(request);
+                    Iterator<FileItem> it = fields.iterator();
                                 
-                while(it.hasNext()){
-                    FileItem fileItem = it.next();
-                    if (fileItem.isFormField()) {
-                        fieldsHash.put(fileItem.getFieldName(), fileItem.getString());
-                    } else {
+                    while(it.hasNext()){
+                        FileItem fileItem = it.next();
+                        if (fileItem.isFormField()) {
+                            fieldsHash.put(fileItem.getFieldName(), fileItem.getString());
+                        } else {
                         
                         //Code to check if the directory exists                        
                         String path  = getServletContext().getRealPath("/");
                         
                         context.log(path);
-                         File file1 = new File(path).getParentFile().getParentFile();
+                        
+                        //createing file uplaod path
+                        File file1 = new File(path).getParentFile().getParentFile();
                         //File file1 = new File(path);
                         File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
                         //File file = new File(file1,"/resources/images/heros-profile/");
@@ -76,17 +81,15 @@ public class UpdateAvenger extends HttpServlet {
                             file.mkdir();
                             context.log("directory created");
                         }
-                        
-                        //uploadPath = "D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
-                        //imageUrl="resources\\images\\heros-profile\\"+ fileItem.getName();
+                       
                         uploadPath = file.getPath()+"/"+fileItem.getName();
                         
                         //get avenger
                         avengerUpdateId = Integer.parseInt(fieldsHash.get("avengerUpdateId"));
                         Avenger checkAvengerImage = avengerDb.getAvenger(avengerUpdateId);
                         
-                        context.log(Boolean.toString(fieldsHash.containsKey("avengerImage")));
-                        context.log(fileItem.getName());
+                        //check if file upload has a file if yes upload new file and delete old one
+                        //else keep the old file
                         if(fileItem.getName() == null || fileItem.getName().equals("")){
                             imageUrl = checkAvengerImage.getImgURL();
                         }else{
@@ -113,10 +116,13 @@ public class UpdateAvenger extends HttpServlet {
                 
                     
                 try{
+                    //get the powersource
                     powersource = powerSourceDb.getPowerSource(Integer.parseInt(fieldsHash.get("powerSource")));
                     context.log(powersource.getDescription());
-        
+                    
+                    //create avenger object
                     Avenger avenger = new Avenger(fieldsHash.get("avengerName"), fieldsHash.get("avengerDescription"), powersource, imageUrl);
+                    //check if update success or not
                     if(avengerDb.updateAvenger(avenger,avengerUpdateId) >  0){
                         RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
                         rd.forward(request, response);

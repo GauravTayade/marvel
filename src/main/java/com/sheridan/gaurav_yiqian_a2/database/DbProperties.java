@@ -11,15 +11,8 @@ package com.sheridan.gaurav_yiqian_a2.database;
  * @author tayad
  */
 public class DbProperties {
-  
-    //digitla ocean properties 
-//    private final String driver = "org.postgresql.Driver";
-//    private final String host = "db-postgresql-tor1-45287-do-user-4482482-0.db.ondigitalocean.com";
-//    private final String username = "doadmin";
-//    private final String password = "jbreb3biix100xq2";
-//    private final String database = "defaultdb";  
-    
-    //local databse properties
+      
+    //Dabase connection properties
     private final String driver = "org.postgresql.Driver";
     private final String host = "localhost";
     private final String username = "postgres";
@@ -47,8 +40,8 @@ public class DbProperties {
         return database;
     }            
     
+    //method to return connection url
     public String getConnectionURL(){
-       // return "jdbc:postgresql://doadmin:jbreb3biix100xq2@db-postgresql-tor1-45287-do-user-4482482-0.db.ondigitalocean.com:25060/defaultdb?sslmode=require";
         return "jdbc:postgresql://"+this.getHost()+"/"+this.getDatabase();
     }
 }

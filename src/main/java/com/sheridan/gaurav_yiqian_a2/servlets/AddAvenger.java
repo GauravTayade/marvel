@@ -39,13 +39,16 @@ public class AddAvenger extends HttpServlet {
     PowerSource powersource;
     
     AvengerDb avengerdb = new AvengerDb();
+    //create hash to store values
     HashMap<String, String> fieldsHash = new HashMap<>();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                
+        //parsing multipart request to check if it is multipart or not
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
         String imageUrl=null;
+        //get servlet context to log
         ServletContext context = request.getServletContext();
         
         if(isMultipartContent){
@@ -55,7 +58,8 @@ public class AddAvenger extends HttpServlet {
             try{
                 List<FileItem> fields = upload.parseRequest(request);                
                 Iterator<FileItem> it = fields.iterator();
-                         context.log("it value: "+it.hasNext());
+                context.log("it value: "+it.hasNext());
+                //loop to check if iterator has value
                 while(it.hasNext()){
                     FileItem fileItem = it.next();
                         if(fileItem.getSize() == 0){
@@ -64,6 +68,8 @@ public class AddAvenger extends HttpServlet {
                             rd.forward(request, response);
                             return;
                         }
+                        
+                    //check if the value is form field
                     if (fileItem.isFormField()) {
                         fieldsHash.put(fileItem.getFieldName(), fileItem.getString());
                     } else {
@@ -72,11 +78,15 @@ public class AddAvenger extends HttpServlet {
                         String path  = getServletContext().getRealPath("/");
                         
                         context.log(path);
+                        
+                        //create file upload path
                         File file1 = new File(path).getParentFile().getParentFile();
                         //File file1 = new File(path);
                         File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
                         //File file = new File(file1,"/resources/images/heros-profile/");
                         context.log("new path after change:"+file.getPath());
+                        
+                        //create directory of does not exits
                         if(!file.isDirectory()){
                             context.log("directory does not exists");
                             file.mkdir();
@@ -90,7 +100,7 @@ public class AddAvenger extends HttpServlet {
                         imageUrl = "resources/images/heros-profile/"+fileItem.getName();
                         
                         context.log(uploadPath);
-                        
+                        //upload image to directory
                         try{
                             fileItem.write(new File(uploadPath));
                         }catch(Exception ex){
@@ -106,19 +116,23 @@ public class AddAvenger extends HttpServlet {
         context.log("worked");
         //get powersource;
         try{
-        powersource = new PowerSource();
-        PowerSourceDb powerSourceDb = new PowerSourceDb();
-        powersource = powerSourceDb.getPowerSource(Integer.parseInt(fieldsHash.get("powerSource")));
-        context.log(powersource.getDescription());
+            powersource = new PowerSource();
+            PowerSourceDb powerSourceDb = new PowerSourceDb();
+            powersource = powerSourceDb.getPowerSource(Integer.parseInt(fieldsHash.get("powerSource")));
+            context.log(powersource.getDescription());
         
-        Avenger avenger = new Avenger(fieldsHash.get("avengerName"), fieldsHash.get("avengerDescription"), powersource, imageUrl);
-        if(avengerdb.addAvenger(avenger) >  0){
-            RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
-            rd.forward(request, response);
-        }else{
-            context.log("failed");
-        }
+            //create a avenger object and call to add method to add avenger in database
+            Avenger avenger = new Avenger(fieldsHash.get("avengerName"), 
+                fieldsHash.get("avengerDescription"), powersource, imageUrl);
+            //if isnert success 
+            if(avengerdb.addAvenger(avenger) >  0){
+                RequestDispatcher rd = request.getRequestDispatcher("success.jsp");
+                rd.forward(request, response);
+            }else{
+                context.log("failed");
+            }
         }catch(Exception ex){
+            context.log(ex.toString());
         }
         
     }

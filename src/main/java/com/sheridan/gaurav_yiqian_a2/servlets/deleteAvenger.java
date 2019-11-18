@@ -15,8 +15,6 @@ import com.sheridan.gaurav_yiqian_a2.model.AvengerDb;
 import com.sheridan.gaurav_yiqian_a2.model.Avenger;
 import java.io.File;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import org.json.JSONObject;
 
@@ -33,25 +31,33 @@ public class deleteAvenger extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
        
+        //get servlet context
         ServletContext context = request.getServletContext();
         
         try{
         
+            //if paramter is not empty
            if(!request.getParameter("id").isEmpty()){
+                //parse parameter from string to integer
                 avengerId = Integer.parseInt(request.getParameter("id"));
                 log(request.getParameter("id"));
+                //get avemger from database
                 Avenger avengerDelete = avengerdb.getAvenger(avengerId);
                 int result = avengerdb.removeAvenger(avengerId);
                 log(Integer.toString(result));
                 
+                //if recorf deleted
                 if(result>0){
+                    
+                        //image path creation to delete the image from disk
                         String path  = getServletContext().getRealPath("/");
                         context.log(path);
                         File file1 = new File(path).getParentFile().getParentFile();
                         //File file1 = new File(path);
                         File file= new File(file1,"src/main/webapp/"+avengerDelete.getImgURL());
                         context.log("file1 value: "+file1.getPath());
-                            context.log("file value: "+file.getPath());
+                        context.log("file value: "+file.getPath());
+                        //check if the image file is deleted
                         if(file.delete()){
                             
                             context.log("iamge successfully Deleted");
@@ -59,6 +65,8 @@ public class deleteAvenger extends HttpServlet {
                             context.log("Failed to delete image");
                         }
                 }
+                
+                //create json object and send the result back as json object
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
                 PrintWriter out = response.getWriter();

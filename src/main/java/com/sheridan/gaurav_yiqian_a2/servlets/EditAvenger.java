@@ -31,16 +31,18 @@ public class EditAvenger extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
-        
+            //parse parameter to interger from string
             avengerId = Integer.parseInt(request.getParameter("avengerId"));
             context = request.getServletContext();
             context.log(request.getParameter("avengerId"));
             Avenger avenger = null;
             try{
+                //get avenger record from database 
                 avenger = avengerDb.getAvenger(avengerId);
             }catch(Exception ex){
                 context.log(ex.toString());
             }
+            //redirect to edit page with the avenger details
             request.setAttribute("AvengerDetail", avenger);
             RequestDispatcher rd = request.getRequestDispatcher("editAvenger.jsp");
             rd.forward(request, response);

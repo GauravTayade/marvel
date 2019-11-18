@@ -4,6 +4,7 @@
     Author     : tayad
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- including custom tag library --%>
 <%@taglib prefix="mylib" uri="/WEB-INF/tlds/powersource.tld" %>
 <jsp:include page="common/header.jsp"></jsp:include>
     <div class="row m-5">
@@ -28,6 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label>Power Source:</label>
+                            <%-- custom tag for powersource with attribute value --%>
                             <mylib:powerSource avengerPowerSourceId="${AvengerDetail.getPowerSource().getId()}"></mylib:powerSource>
                         </div>
                         <div class="form-group">

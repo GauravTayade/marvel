@@ -22,7 +22,9 @@ public class UserLogout extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //get the current session
         HttpSession userSession = request.getSession(false);
+        //destroy user session and redirect to index.jsp
         if(userSession.getAttribute("user")!=null || userSession.getAttribute("user").equals("")){
             userSession.invalidate();
             response.sendRedirect("index.jsp");

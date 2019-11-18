@@ -16,9 +16,11 @@ public class User {
     
     private String username,firstname,lastname,email;
 
+    //default constructor
     public User() {
     }
     
+    //parameterized constructor for user.
     public User(String firstname, String lastname, String username, String email){
         this.firstname = firstname;
         this.lastname = lastname;
@@ -58,6 +60,7 @@ public class User {
         this.email = email;
     }
     
+    //method to get full name of the user
     public String getFullname(){
         return this.getFirstname()+" "+this.getLastname();
     }

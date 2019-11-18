@@ -21,6 +21,7 @@ public class UserDb {
     boolean isUser = false;
     User user=null;
     
+    //method to validate login credentials against database
     public boolean loginCheck(String username, String password)throws Exception{
     
         String sqlUserSelect;

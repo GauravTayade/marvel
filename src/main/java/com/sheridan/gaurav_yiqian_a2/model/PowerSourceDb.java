@@ -23,6 +23,7 @@ public class PowerSourceDb {
     private PowerSource powerSource;
     Db db = new Db();
         
+    //to get specific powersource from database
     public PowerSource getPowerSource(int id) throws Exception{
         
         Connection sqlconConnection = db.getConnection();
@@ -46,6 +47,7 @@ public class PowerSourceDb {
         return powerSource;
     }
     
+    //to get list of powersource from database
     public ArrayList<PowerSource> getPowerSources() throws Exception{
         
         Connection sqlconnection = db.getConnection();

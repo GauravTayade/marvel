@@ -17,9 +17,11 @@ public class PowerSource implements Serializable{
     private int id;
     private String description;
 
+    //default constructor
     public PowerSource(){
     }
     
+    //parameterized constructor for custom tag handler
     public PowerSource(int id,String description) {
         this.id = id;
         this.description = description;

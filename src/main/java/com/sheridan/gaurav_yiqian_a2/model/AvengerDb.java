@@ -21,9 +21,11 @@ public class AvengerDb {
     
     PowerSourceDb pwsDb = new PowerSourceDb();
     Db db = new Db();
-       
+    
+    //arraylist to store heros list
     private ArrayList<Avenger> avengersList = new ArrayList<>();
     
+    //method to add avenger in the database
     public int addAvenger(Avenger avenger) throws Exception{
     
         int result = 0;
@@ -50,6 +52,7 @@ public class AvengerDb {
         return result;
     }
     
+    //method to delete avenger from database
     public int removeAvenger(int id) throws Exception{
         
         int result=0 ;
@@ -73,6 +76,7 @@ public class AvengerDb {
         return result;
     }
     
+    //method to get all avengers list from database
     public ArrayList<Avenger> getAvengers() throws Exception{
     
         Connection sqlconnection = db.getConnection();
@@ -105,6 +109,7 @@ public class AvengerDb {
     
     }
     
+    //method to get avenger from database based on id for update
     public Avenger getAvenger(int avengerId) throws Exception{
    
         Connection sqlconConnection = db.getConnection();
@@ -137,6 +142,7 @@ public class AvengerDb {
         return avenger;
     }
     
+    //method to update avenger in the database.
     public int updateAvenger(Avenger avenger,int avengerId) throws Exception{
     
         int result;

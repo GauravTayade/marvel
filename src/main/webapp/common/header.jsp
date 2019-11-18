@@ -11,16 +11,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-<!--        <link rel="icon" type="image/png" sizes="32x32" href="resources/images/favicon/favicon-32x32.png">-->
+        <link rel="icon" type="image/png" sizes="32x32" href="resources/images/favicon/favicon-32x32.png">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Avenger Universe</title>
-         <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-            <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<!--            bootstrap 4 integration-->
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            <link rel="stylesheet" href="resources/css/custom.css">
-            <link rel="stylesheet" href="resources/plugins/fontawesome/all.css">
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!--    bootstrap 4 integration-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="resources/css/custom.css">
+        <link rel="stylesheet" href="resources/plugins/fontawesome/all.css">
     </head>
     <body>
         <header class="nav-bar-position">

@@ -15,7 +15,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import com.sheridan.gaurav_yiqian_a2.model.PowerSourceDb;
 import com.sheridan.gaurav_yiqian_a2.model.PowerSource;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +24,7 @@ import java.util.ArrayList;
 public class PowerSourceHandler extends SimpleTagSupport{
 
     PowerSourceDb powersource = new PowerSourceDb();
+    //list to store all fatched powersoruces in the list
     ArrayList<PowerSource> powerSourceList = new ArrayList<>();
     private int avengerPowerSourceId;
 
@@ -39,10 +39,11 @@ public class PowerSourceHandler extends SimpleTagSupport{
     @Override
     public void doTag() throws JspException, IOException {
            
+        //clear list before loading with powersources
         powerSourceList.clear();
         
         try{
-       
+            //get the list of powersoruces
             powerSourceList = powersource.getPowerSources();
         
         }catch(Exception ex){
@@ -56,13 +57,19 @@ public class PowerSourceHandler extends SimpleTagSupport{
             if(f!=null){
                 f.invoke(out);
             }
+            
+            //setting select list as output using jsp writer
             out.println("<select class=\"form-control\" name=\"powerSource\" required>");
             out.println("<option value=\"\">Select Powersource</option>");
             for (PowerSource powerSource : powerSourceList) {
+                //check if the powersource id matches with the any existing 
+                //record to make it selected on edit page
                 if(this.getAvengerPowerSourceId() == powerSource.getId()){
-                    out.println("<option value="+powerSource.getId()+" selected>"+powerSource.getDescription()+"</option>");
+                    out.println("<option value="+powerSource.getId()+" selected>"
+                            +powerSource.getDescription()+"</option>");
                 }else{
-                    out.println("<option value="+powerSource.getId()+">"+powerSource.getDescription()+"</option>");
+                    out.println("<option value="+powerSource.getId()+">"
+                            +powerSource.getDescription()+"</option>");
                 }
             }
             

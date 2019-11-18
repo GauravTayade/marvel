@@ -19,6 +19,7 @@ public class Avenger implements Serializable{
     private PowerSource powerSource;
     private String imgURL;
 
+    //Avenger class parameterized constructor with id for update and delete methods
     public Avenger(int id, String name, String description, PowerSource powerSource,String imgURL) {
         this.id = id;
         this.name = name;
@@ -27,6 +28,7 @@ public class Avenger implements Serializable{
         this.imgURL = imgURL;
     }
     
+    //Avenger class parameterized constructor withour id for insert 
     public Avenger(String name, String desciption,PowerSource powerSource, String imgURL){
         this.name = name;
         this.description = desciption;
