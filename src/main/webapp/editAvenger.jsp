@@ -20,11 +20,11 @@
                         <input type="hidden" name="avengerUpdateId" value="${AvengerDetail.getId()}">
                         <div class="form-group">
                             <label for="avengerName">Avenger Name:</label>
-                            <input type="text"  name="avengerName" class="form-control" id="avengerName" value="${AvengerDetail.getName()}" placeholder="Enter Avenger Name">
+                            <input type="text"  name="avengerName" class="form-control" id="avengerName" value="${AvengerDetail.getName()}" placeholder="Enter Avenger Name" required="required">
                         </div>
                         <div class="form-group">
                             <label for="avengerDescription">Description</label>
-                            <input type="text" name="avengerDescription" class="form-control" id="avengerDescription" value="${AvengerDetail.getDescription()}" placeholder="Enter Description">
+                            <input type="text" name="avengerDescription" class="form-control" id="avengerDescription" value="${AvengerDetail.getDescription()}" placeholder="Enter Description" required="required">
                         </div>
                         <div class="form-group">
                             <label>Power Source:</label>
@@ -39,8 +39,16 @@
                                             <span class="input-group-text">Upload</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="avengerImage" name="avengerImage">
-                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            <c:choose>
+                                                <c:when test="${empty AvengerDetail.getImgURL()}">
+                                                    <input type="file" class="custom-file-input" id="avengerImage" name="avengerImage" required="required">
+                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                </c:when>
+                                                <c:otherwise>    
+                                                    <input type="file" class="custom-file-input" id="avengerImage" name="avengerImage">
+                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div> 
                                 </div>
@@ -56,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Avenger</button>
+                        <button type="submit" class="btn btn-primary" id="btnAddAvenger">Update Avenger</button>
                     </form>
                 </div>
                 <div class="col-md-3"></div>

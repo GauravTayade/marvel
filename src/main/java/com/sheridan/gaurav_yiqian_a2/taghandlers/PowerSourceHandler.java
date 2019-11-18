@@ -56,7 +56,7 @@ public class PowerSourceHandler extends SimpleTagSupport{
             if(f!=null){
                 f.invoke(out);
             }
-            out.println("<select class=\"form-control\" name=\"powerSource\">");
+            out.println("<select class=\"form-control\" name=\"powerSource\" required>");
             out.println("<option value=\"\">Select Powersource</option>");
             for (PowerSource powerSource : powerSourceList) {
                 if(this.getAvengerPowerSourceId() == powerSource.getId()){

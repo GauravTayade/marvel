@@ -8,7 +8,7 @@ $(document).ready(function() {
     $("#btnLogin").on("click", function() {
         
         var username = $('#inputUsername').val();
-        var password = $('#inputPassword').val()
+        var password = $('#inputPassword').val();
         
         if(username == null || username == '' && 
                 password == null || password == ''){          

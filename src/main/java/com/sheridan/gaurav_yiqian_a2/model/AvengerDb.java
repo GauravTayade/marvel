@@ -78,7 +78,7 @@ public class AvengerDb {
         Connection sqlconnection = db.getConnection();
         ResultSet resultSetAvengers=null;
                 
-        String getAvengersQuery = "SELECT * FROM avengers";
+        String getAvengersQuery = "SELECT * FROM avengers ORDER BY avengername ASC";
         PreparedStatement statement = sqlconnection.prepareStatement(getAvengersQuery);        
          
         try{

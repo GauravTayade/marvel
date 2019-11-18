@@ -53,11 +53,17 @@ public class AddAvenger extends HttpServlet {
             ServletFileUpload upload = new ServletFileUpload(factory);
             
             try{
-                List<FileItem> fields = upload.parseRequest(request);
+                List<FileItem> fields = upload.parseRequest(request);                
                 Iterator<FileItem> it = fields.iterator();
-                                
+                         context.log("it value: "+it.hasNext());
                 while(it.hasNext()){
                     FileItem fileItem = it.next();
+                        if(fileItem.getSize() == 0){
+                            request.setAttribute("error","Please fill all the inputs");
+                            RequestDispatcher rd = request.getRequestDispatcher("addAvenger.jsp");
+                            rd.forward(request, response);
+                            return;
+                        }
                     if (fileItem.isFormField()) {
                         fieldsHash.put(fileItem.getFieldName(), fileItem.getString());
                     } else {

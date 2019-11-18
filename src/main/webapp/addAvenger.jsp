@@ -3,6 +3,7 @@
     Created on : 2-Nov-2019, 1:39:58 PM
     Author     : Gaurav Tayade
 --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="mylib" uri="/WEB-INF/tlds/powersource.tld" %>
 <jsp:include page="common/header.jsp"></jsp:include>
     <div class="row m-5">
@@ -10,6 +11,11 @@
     </div>
     <div class="container-fluid">
         <div class="row">
+        <c:if test="${not empty requestScope.error}">
+            <div class="col-md-12 text-center alert alert-danger">
+                <c:out value="${requestScope.error}"></c:out>
+            </div>
+        </c:if>
             <div class="col-md-12">
                 <div class="row my-5">
                 <div class="col-md-3"></div>
@@ -18,11 +24,11 @@
                     <form action="addAvenger.do" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="avengerName">Avenger Name:</label>
-                            <input type="text"  name="avengerName" class="form-control" id="avengerName"placeholder="Enter Avenger Name">
+                            <input type="text"  name="avengerName" class="form-control" id="avengerName"placeholder="Enter Avenger Name" required="required">
                         </div>
                         <div class="form-group">
                             <label for="avengerDescription">Description</label>
-                            <input type="text" name="avengerDescription" class="form-control" id="avengerDescription" placeholder="Enter Description">
+                            <input type="text" name="avengerDescription" class="form-control" id="avengerDescription" placeholder="Enter Description" required="required">
                         </div>
                         <div class="form-group">
                             <label>Power Source:</label>
@@ -37,7 +43,7 @@
                                             <span class="input-group-text">Upload</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="avengerImage" name="avengerImage">
+                                            <input type="file" class="custom-file-input" id="avengerImage" name="avengerImage" required="required">
                                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                         </div>
                                     </div> 

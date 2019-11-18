@@ -13,7 +13,6 @@ import com.sheridan.gaurav_yiqian_a2.model.PowerSource;
 import com.sheridan.gaurav_yiqian_a2.model.PowerSourceDb;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -67,10 +66,11 @@ public class UpdateAvenger extends HttpServlet {
                         String path  = getServletContext().getRealPath("/");
                         
                         context.log(path);
-                        File file1 = new File(path).getParentFile().getParentFile();
-                        File file= new File(file1,"/uploads//");
-                        
-                        context.log("new path after change:"+file.getPath()+"\\");
+                         File file1 = new File(path).getParentFile().getParentFile();
+                        //File file1 = new File(path);
+                        File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
+                        //File file = new File(file1,"/resources/images/heros-profile/");
+                        context.log("new path after change:"+file.getPath()+"/");
                         if(!file.isDirectory()){
                             context.log("directory does not exists");
                             file.mkdir();
@@ -79,7 +79,7 @@ public class UpdateAvenger extends HttpServlet {
                         
                         //uploadPath = "D:\\Sheridan\\Semester-3\\Enterprise JAVA\\Assignments\\Assignment-2\\gaurav_yiqian_a2\\src\\main\\webapp\\resources\\images\\heros-profile\\"+ fileItem.getName();
                         //imageUrl="resources\\images\\heros-profile\\"+ fileItem.getName();
-                        uploadPath = file1.getPath()+"\\src\\main\\webapp\\resources\\images\\heros-profile\\"+fileItem.getName();
+                        uploadPath = file.getPath()+"/"+fileItem.getName();
                         
                         //get avenger
                         avengerUpdateId = Integer.parseInt(fieldsHash.get("avengerUpdateId"));
@@ -90,8 +90,17 @@ public class UpdateAvenger extends HttpServlet {
                         if(fileItem.getName() == null || fileItem.getName().equals("")){
                             imageUrl = checkAvengerImage.getImgURL();
                         }else{
-                            imageUrl = "resources\\images\\heros-profile\\"+fileItem.getName();
+                            File deleteFile = new File(file1+"/src/main/webapp/",checkAvengerImage.getImgURL());
+                            
+                            if(deleteFile.delete()){
+                                context.log("image deleted for updated image");
+                            }else{
+                                context.log("failed to delete image");
+                            }
+                            
+                            imageUrl = "resources/images/heros-profile/"+fileItem.getName();
                             try{
+                                context.log(uploadPath);
                                 fileItem.write(new File(uploadPath));
                             }catch(Exception flx){
                                 context.log(flx.toString());

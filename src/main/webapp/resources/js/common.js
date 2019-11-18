@@ -41,12 +41,20 @@ $(".btnDelete").on("click",function(e){
                     cache   : false,
                     data    : {id:avengerIdValue},
                     dataType: "json",
-                    success: function (result){
-                        Swal.fire(
-                            'You have Removed an Avenger!',
-                            'We Lost our Commarade.',
-                            'success'
-                        )
+                    success: function (responseObj){
+                        if(responseObj.result ==1){
+                            Swal.fire(
+                                'You have Removed an Avenger!',
+                                'We Lost our Commarade.',
+                                'success'
+                            )
+                        }else{
+                            Swal.fire(
+                                'Something went Wrong',
+                                'Unable to Delete the record',
+                                'error'
+                            )
+                        }
                     },
                     error: function (result){
                         console.log(result)
