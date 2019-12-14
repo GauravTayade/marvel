@@ -18,6 +18,7 @@ public class DbProperties {
     private final String username = "postgres";
     private final String password = "root";
     private final String database = "MyDb";  
+   // private final String database = "mydb";
     private String connectionURL;
 
     public String getDriver() {

@@ -52,9 +52,10 @@ public class deleteAvenger extends HttpServlet {
                         //image path creation to delete the image from disk
                         String path  = getServletContext().getRealPath("/");
                         context.log(path);
-                        File file1 = new File(path).getParentFile().getParentFile();
-                        //File file1 = new File(path);
-                        File file= new File(file1,"src/main/webapp/"+avengerDelete.getImgURL());
+                        //File file1 = new File(path).getParentFile().getParentFile();
+                        File file1 = new File(path);
+                        //File file= new File(file1,"src/main/webapp/"+avengerDelete.getImgURL());
+                        File file= new File(file1,avengerDelete.getImgURL());
                         context.log("file1 value: "+file1.getPath());
                         context.log("file value: "+file.getPath());
                         //check if the image file is deleted

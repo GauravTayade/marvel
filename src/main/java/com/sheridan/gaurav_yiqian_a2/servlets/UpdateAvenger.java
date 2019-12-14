@@ -26,6 +26,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -35,6 +36,7 @@ public class UpdateAvenger extends HttpServlet {
 
     int avengerUpdateId;
     AvengerDb avengerDb = new AvengerDb();
+    String extension;
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,11 +73,12 @@ public class UpdateAvenger extends HttpServlet {
                         context.log(path);
                         
                         //createing file uplaod path
-                        File file1 = new File(path).getParentFile().getParentFile();
-                        //File file1 = new File(path);
-                        File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
-                        //File file = new File(file1,"/resources/images/heros-profile/");
+                        //File file1 = new File(path).getParentFile().getParentFile();
+                        File file1 = new File(path);
+                        //File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
+                        File file = new File(file1,"/resources/images/heros-profile/");
                         context.log("new path after change:"+file.getPath()+"/");
+                       
                         if(!file.isDirectory()){
                             context.log("directory does not exists");
                             file.mkdir();
@@ -92,9 +95,10 @@ public class UpdateAvenger extends HttpServlet {
                         //else keep the old file
                         if(fileItem.getName() == null || fileItem.getName().equals("")){
                             imageUrl = checkAvengerImage.getImgURL();
+                            extension = checkAvengerImage.getExtension();
                         }else{
-                            File deleteFile = new File(file1+"/src/main/webapp/",checkAvengerImage.getImgURL());
-                            
+                            //File deleteFile = new File(file1+"/src/main/webapp/",checkAvengerImage.getImgURL());
+                            File deleteFile = new File(file1,checkAvengerImage.getImgURL());
                             if(deleteFile.delete()){
                                 context.log("image deleted for updated image");
                             }else{
@@ -102,6 +106,7 @@ public class UpdateAvenger extends HttpServlet {
                             }
                             
                             imageUrl = "resources/images/heros-profile/"+fileItem.getName();
+                            extension = FilenameUtils.getExtension(fileItem.getName());
                             try{
                                 context.log(uploadPath);
                                 fileItem.write(new File(uploadPath));
@@ -121,7 +126,7 @@ public class UpdateAvenger extends HttpServlet {
                     context.log(powersource.getDescription());
                     
                     //create avenger object
-                    Avenger avenger = new Avenger(fieldsHash.get("avengerName"), fieldsHash.get("avengerDescription"), powersource, imageUrl);
+                    Avenger avenger = new Avenger(fieldsHash.get("avengerName"), fieldsHash.get("avengerDescription"), powersource, imageUrl,extension);
                     //check if update success or not
                     if(avengerDb.updateAvenger(avenger,avengerUpdateId) >  0){
                         RequestDispatcher rd = request.getRequestDispatcher("success.jsp");

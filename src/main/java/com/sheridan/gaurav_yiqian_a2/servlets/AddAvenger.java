@@ -28,6 +28,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 /**
  *
  * @author tayad
@@ -35,7 +36,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @MultipartConfig
 public class AddAvenger extends HttpServlet {
    
-    String name,description,imgURL,uploadPath;
+    String name,description,imgURL,uploadPath,extension;
     PowerSource powersource;
     
     AvengerDb avengerdb = new AvengerDb();
@@ -82,8 +83,8 @@ public class AddAvenger extends HttpServlet {
                         //create file upload path
                         File file1 = new File(path).getParentFile().getParentFile();
                         //File file1 = new File(path);
-                        File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
-                        //File file = new File(file1,"/resources/images/heros-profile/");
+                        //File file= new File(file1,"/src/main/webapp/resources/images/heros-profile/");
+                        File file = new File(file1,"/resources/images/heros-profile/");
                         context.log("new path after change:"+file.getPath());
                         
                         //create directory of does not exits
@@ -98,7 +99,8 @@ public class AddAvenger extends HttpServlet {
                         uploadPath = file1.getPath()+"/src/main/webapp/resources/images/heros-profile/"+fileItem.getName();
                         //uploadPath = file1.getPath()+"/resources/images/heros-profile/"+fileItem.getName();
                         imageUrl = "resources/images/heros-profile/"+fileItem.getName();
-                        
+                        extension = FilenameUtils.getExtension(fileItem.getName());
+                        context.log(extension);
                         context.log(uploadPath);
                         //upload image to directory
                         try{
@@ -123,7 +125,7 @@ public class AddAvenger extends HttpServlet {
         
             //create a avenger object and call to add method to add avenger in database
             Avenger avenger = new Avenger(fieldsHash.get("avengerName"), 
-                fieldsHash.get("avengerDescription"), powersource, imageUrl);
+                fieldsHash.get("avengerDescription"), powersource, imageUrl,extension);
             //if isnert success 
             if(avengerdb.addAvenger(avenger) >  0){
                 RequestDispatcher rd = request.getRequestDispatcher("success.jsp");

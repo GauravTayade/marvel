@@ -31,13 +31,14 @@ public class AvengerDb {
         int result = 0;
         Connection sqlconnection = db.getConnection();
         
-        String insertQuery = "INSERT INTO avengers (\"avengername\",\"description\",\"powersource\",\"img\")"
-                +"VALUES(?,?,?,?)"; 
+        String insertQuery = "INSERT INTO avengers (\"avengername\",\"description\",\"powersource\",\"img\",\"ext\")"
+                +"VALUES(?,?,?,?,?)"; 
         PreparedStatement statement = sqlconnection.prepareStatement(insertQuery);
             statement.setString(1,avenger.getName());
             statement.setString(2,avenger.getDescription());
             statement.setInt(3,avenger.getPowerSource().getId());
             statement.setString(4,avenger.getImgURL());
+            statement.setString(5, avenger.getExtension());
         
         try{
         
@@ -83,7 +84,7 @@ public class AvengerDb {
         ResultSet resultSetAvengers=null;
                 
         String getAvengersQuery = "SELECT * FROM avengers ORDER BY avengername ASC";
-        PreparedStatement statement = sqlconnection.prepareStatement(getAvengersQuery);        
+        PreparedStatement statement = sqlconnection.prepareStatement(getAvengersQuery); 
          
         try{
            
@@ -96,13 +97,13 @@ public class AvengerDb {
                 PowerSource avengerPowerSource = pwsDb.getPowerSource(resultSetAvengers.getInt(4));
                 avengersList.add(new Avenger(resultSetAvengers.getInt(1),
                         resultSetAvengers.getString(2),resultSetAvengers.getString(3),
-                        avengerPowerSource,resultSetAvengers.getString(5)));
+                        avengerPowerSource,resultSetAvengers.getString(5),resultSetAvengers.getString(6)));
             }
             
         }catch(SQLException sqlex){
             System.out.println(sqlex.toString());
         } finally{
-             sqlconnection.close();
+            sqlconnection.close();
         }   
           
         return avengersList;
@@ -132,7 +133,8 @@ public class AvengerDb {
                     resultSetAvenger.getString(2), 
                     resultSetAvenger.getString(3), 
                     powerSource, 
-                    resultSetAvenger.getString(5));
+                    resultSetAvenger.getString(5),
+                    resultSetAvenger.getString(6));
             }
         }catch(SQLException sqlex){
             throw  new SQLException(sqlex.toString());
@@ -151,14 +153,16 @@ public class AvengerDb {
          String updateAvengerQuery = "Update avengers SET avengername=?,"
                     + "description=?,"
                     + "powersource=?,"
-                    + "img=? where id=?";
+                    + "img=? "
+                    + "ext=? where id=?";
             
             PreparedStatement statement = sqlConnection.prepareStatement(updateAvengerQuery);
             statement.setString(1, avenger.getName());
             statement.setString(2, avenger.getDescription());
             statement.setInt(3, avenger.getPowerSource().getId());
             statement.setString(4,avenger.getImgURL());
-            statement.setInt(5, avengerId);
+            statement.setString(5,avenger.getExtension());
+            statement.setInt(6, avengerId);
         
         try{
            

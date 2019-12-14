@@ -15,7 +15,17 @@
         <div class="row text-center">
             <c:forEach var="avenger" items="${avengersList}">
                 <div class="card mx-5 my-5 box-shadow hero-card" style="width: 17.5rem;">
-                    <img src="${avenger.getImgURL()}" class="card-img-top" alt="...">
+                    <c:choose>
+                        <c:when test="${avenger.getExtension() == 'mp4'}">
+                            <video controls>
+                                <source src="${avenger.getImgURL()}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="${avenger.getImgURL()}" class="card-img-top" alt="...">
+                        </c:otherwise>
+                    </c:choose>
                     <div class="card-body">
                         <h5 class="card-title text-center">${avenger.getName()}</h5>
                         <p class="card-text">${avenger.getDescription()}</p>

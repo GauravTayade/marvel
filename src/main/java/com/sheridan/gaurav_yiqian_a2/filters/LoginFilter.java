@@ -38,7 +38,7 @@ public class LoginFilter implements Filter{
     @Override
     public void doFilter(ServletRequest request,ServletResponse response,FilterChain chain)
               throws java.io.IOException, ServletException{
-         
+        
         HttpServletRequest servletRequest = (HttpServletRequest) request;
         HttpServletResponse servletResponse = (HttpServletResponse) response;
 	
@@ -52,6 +52,10 @@ public class LoginFilter implements Filter{
                 (uriParts[uriParts.length-1].equals("addAvenger.do") &&
                 userSession.getAttribute("user") == null)||
                 (uriParts[uriParts.length-2].equals("editAvenger.do") &&
+                userSession.getAttribute("user") == null)||
+                (uriParts[uriParts.length-2].equals("deleteAvenger.do") &&
+                userSession.getAttribute("user") == null)||
+                (uriParts[uriParts.length-2].equals("updateAvenger.do") &&
                 userSession.getAttribute("user") == null)){
                 this.context.log("session checked");
             servletResponse.sendRedirect("index.jsp");

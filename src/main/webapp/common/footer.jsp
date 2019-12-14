@@ -33,16 +33,16 @@
                 <div class="col-md-12 text-center text-white mb-5">
                     <h4>Yiqian Chang</h4>
                 </div>
-                <a href="https://www.facebook.com/gaurav.tayade.33" target="_blank">
+<!--                <a href="https://www.facebook.com/gaurav.tayade.33" target="_blank">
                     <i class="fab fa-facebook fa-2x mx-5 mb-4 icon-white"></i>
                 </a>
                 <a href="https://www.instagram.com/the_byr0n/" target="_blank">
                     <i class="fab fa-instagram fa-2x mx-5 mb-4 icon-white"></i>
-                </a>
-                <a href="https://github.com/GauravTayade" target="_blank">
+                </a>-->
+                <a href="https://github.com/changyiq" target="_blank">
                     <i class="fab fa-github fa-2x mx-5 mb-4 icon-white"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/gaurav-tayade/" target="_blank">
+                <a href="https://www.linkedin.com/in/yiqian-alison-chang/" target="_blank">
                     <i class="fab fa-linkedin fa-2x mx-5 mb-4 icon-white"></i>
                 </a>
             </div>

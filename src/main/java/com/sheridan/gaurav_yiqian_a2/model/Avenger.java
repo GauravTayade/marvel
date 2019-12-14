@@ -18,22 +18,25 @@ public class Avenger implements Serializable{
     private String name,description;
     private PowerSource powerSource;
     private String imgURL;
+    private String extension;
 
     //Avenger class parameterized constructor with id for update and delete methods
-    public Avenger(int id, String name, String description, PowerSource powerSource,String imgURL) {
+    public Avenger(int id, String name, String description, PowerSource powerSource,String imgURL,String extension) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.powerSource = powerSource;
         this.imgURL = imgURL;
+        this.extension = extension;
     }
     
     //Avenger class parameterized constructor withour id for insert 
-    public Avenger(String name, String desciption,PowerSource powerSource, String imgURL){
+    public Avenger(String name, String desciption,PowerSource powerSource, String imgURL,String extension){
         this.name = name;
         this.description = desciption;
         this.powerSource = powerSource;
         this.imgURL = imgURL;
+        this.extension = extension;
     }
     
     public int getId() {
@@ -76,6 +79,11 @@ public class Avenger implements Serializable{
         this.imgURL = imgURL;
     }
     
+    public String getExtension(){
+        return extension;
+    }
     
-    
+    public void setExtension(String extension){
+        this.extension = extension;
+    }    
 }

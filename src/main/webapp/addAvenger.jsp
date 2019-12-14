@@ -50,7 +50,7 @@
                                         </div>
                                     </div> 
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="content">
                                     <img src="resources/images/image-preview.png" style="height:250px;width:250px;" class="rounded img-fluid box-shadow" id="avengerImagePreview">
                                 </div>
                             </div>

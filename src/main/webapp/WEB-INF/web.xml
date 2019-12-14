@@ -44,33 +44,6 @@
         <servlet-name>UserLogout</servlet-name>
         <url-pattern>/userLogout.do</url-pattern>
     </servlet-mapping>
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <!-- mandatory -->
-        <filter-class>com.sheridan.gaurav_yiqian_a2.filters.LoginFilter</filter-class>
-        <!-- mandatory -->
-        <init-param>
-            <!-- optional -->
-            <param-name>notAllowed</param-name>
-            <param-value>addAvenger.jsp</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <!-- mandatory -->
-        <url-pattern>/addAvenger.jsp</url-pattern>
-        <!-- either url-pattern or servlet-name is mandatory -->
-        <servlet-name>AdAvenger</servlet-name>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <!-- mandatory -->
-        <url-pattern>/displayAvengers.jsp</url-pattern>
-        <!-- either url-pattern or servlet-name is mandatory -->
-        <!--        <servlet-name>GetAvengers</servlet-name>-->
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
@@ -95,6 +68,30 @@
         <servlet-name>UpdateAvenger</servlet-name>
         <url-pattern>/updateAvenger.do</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <!-- mandatory -->
+        <filter-class>com.sheridan.gaurav_yiqian_a2.filters.LoginFilter</filter-class>
+        <!-- mandatory -->
+        <init-param>
+            <!-- optional -->
+            <param-name>notAllowed</param-name>
+            <param-value>addAvenger.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <!-- mandatory -->
+        <url-pattern>/addAvenger.jsp</url-pattern>
+        <url-pattern>/getAvengers.do</url-pattern>
+        <url-pattern>/displayAvengers.jsp</url-pattern>
+        <url-pattern>/deleteAvenger.do</url-pattern>
+        <url-pattern>/editAvenger.do</url-pattern>
+        <url-pattern>/displayAvengers.jsp</url-pattern>
+        <!-- either url-pattern or servlet-name is mandatory -->
+<!--        <servlet-name>AdAvenger</servlet-name>-->
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30

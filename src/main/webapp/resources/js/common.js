@@ -7,13 +7,32 @@
 
 function readURL(input) {
   if (input.files && input.files[0]) {
+      
+    var ext = input.files[0].name.split('.').pop();
+  
     var reader = new FileReader();
+    console.log(ext);
+    if(ext.toString().toLowerCase() == 'mp4'){
+        console.log('called');
+        reader.onload  = function(e){
+            console.log('inside');
+            $('#content').children().remove();
+            //var video = "<img src=\"resources/images/video_placeholder.png\" style=\"height:250px;width:250px;\" class=\"rounded img-fluid box-shadow\" id=\"avengerImagePreview\">"
+            var  video = "<video width=\"250\" height=\"250\" controls><source src="+e.target.result+" class=\"rounded img-fluid box-shadow\" type=\"video/mp4\"></video> "; 
+            console.log(video);
+            $('#content').append(video);  
+        }
+        reader.readAsDataURL(input.files[0]); 
+    }else{
+        reader.onload = function(e) {
+            $('#content').children().remove();
+            var image = "<img src="+e.target.result+" style=\"height:250px;width:250px;\" class=\"rounded img-fluid box-shadow\" id=\"avengerImagePreview\">"
+            $('#content').append(image);
+      //$('#avengerImagePreview').attr('src', e.target.result);
+    };
     
-    reader.onload = function(e) {
-      $('#avengerImagePreview').attr('src', e.target.result);
+    reader.readAsDataURL(input.files[0]);   
     }
-    
-    reader.readAsDataURL(input.files[0]);
   }
 }
 
